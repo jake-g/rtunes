@@ -1,0 +1,29 @@
+@import '../styles/variables';
+
+.sort {
+  margin-bottom: $spacing;
+  // text-align: right;
+  font-weight: 500;
+
+  li {
+    display: inline-block;
+    margin-right: $spacing;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.playlist {
+  margin-bottom: $spacing;
+}
+
+.activeSortLink {
+  padding-bottom: 2px;
+  border-bottom: 2px $link-color solid;
+
+  &:hover {
+    border-bottom-color: lighten($link-color, 20%);
+  }
+}
