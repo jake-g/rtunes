@@ -122,7 +122,7 @@ export default class Playlist extends Component {
           <li>{SEPARATOR}</li>
           <li><a href={url} target='_blank'>now playing</a></li>
           <li>{SEPARATOR}</li>
-          <li><a href={'https://www.reddit.com' + pathname + search} target='_blank'>source</a></li>
+          <li><a href={'https://www.reddit.com' + pathname + search} target='_blank'>reddit source</a></li>
 
         </ul>
       )
@@ -183,7 +183,7 @@ function  getStyle() {
     playlist: {
       overflowY: 'scroll',
       flex: 3,
-      height: '90vh'
+      height: '85vh'
     },
 
   };
