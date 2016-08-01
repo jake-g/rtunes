@@ -109,6 +109,7 @@ export default class Playlist extends Component {
         <ul className={classNames.sort}>
           <li><Link to={path} activeClassName={classNames.activeSortLink}>hot</Link></li>
           <li><Link to={path + '/new'} activeClassName={classNames.activeSortLink}>new</Link></li>
+          <li>{SEPARATOR}</li>
           <li>top</li>
           {['all', 'year', 'month', 'week', 'day'].map((sort) => {
             return (
@@ -121,8 +122,8 @@ export default class Playlist extends Component {
           })}
           <li>{SEPARATOR}</li>
           <li><a href={url} target='_blank'>now playing</a></li>
-          <li>{SEPARATOR}</li>
-          <li><a href={'https://www.reddit.com' + pathname + search} target='_blank'>reddit source</a></li>
+          {/*<li>{SEPARATOR}</li>*/}
+          {/*<li><a href={'https://www.reddit.com' + pathname + search} target='_blank'>reddit source</a></li>*/}
 
         </ul>
       )
