@@ -3,7 +3,7 @@ import { fetchPosts } from 'fetch-reddit'
 import ReactPlayer from 'react-player'
 import { Link } from 'react-router'
 
-import classNames from './Playlist.scss'
+import classNames from '../styles/components/Playlist.scss'
 import Player from './Player'
 import Button from './Button'
 import Post from './Post'

@@ -1,7 +1,7 @@
 import React from 'react'
 import { isNumber } from '../utils'
 
-import classNames from './Range.scss'
+import classNames from '../styles/components/Range.scss'
 
 const THUMB_WIDTH = 10
 

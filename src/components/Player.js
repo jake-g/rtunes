@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import ReactPlayer from 'react-player'
 
-import classNames from './Player.scss'
+import classNames from '../styles/components/Player.scss'
 import Range from './Range'
 import Icon from './Icon'
 import Duration from './Duration'

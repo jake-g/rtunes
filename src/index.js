@@ -3,8 +3,8 @@ import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Redirect, browserHistory } from 'react-router'
 
 // import { trackPageView } from './analytics'
-import App from './pages/App'
-import Home from './pages/Home'
+import App from './containers/App'
+import Home from './containers/Home'
 import Playlist from './components/Playlist'
 
 // Hook up analytics

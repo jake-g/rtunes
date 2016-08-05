@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import classNames from './Home.scss'
+import classNames from '../styles/containers/Home.scss'
 import playlists from '../../data/playlists.json'
 import TopThreads from '../components/TopThreads'
 import Item from '../components/Item'

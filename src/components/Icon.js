@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import classNames from './Icon.scss'
+import classNames from '../styles/components/Icon.scss'
 
 export default function Icon ({ icon, className = '', ...extraProps }) {
   return (

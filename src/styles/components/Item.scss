@@ -1,4 +1,4 @@
-@import '../styles/variables';
+@import '../variables';
 
 $height: 2.5rem;
 $active-background: rgba($link-color, .1);
@@ -30,7 +30,7 @@ $title-font-size: 15px;
   height: $height;
   line-height: $height;
   margin-right: $spacing;
-  border-radius: 50%;
+  border-radius: 15%;
   background-color: $thumb-background;
   background-position: center;
   background-size: auto 135%; // Zoom a bit to crop out letterboxing
@@ -61,7 +61,7 @@ $title-font-size: 15px;
 }
 
 .title {
-  composes: truncate from '../styles/_utils.scss';
+  composes: truncate from '../_utils.scss';
   font-size: $title-font-size;
 }
 

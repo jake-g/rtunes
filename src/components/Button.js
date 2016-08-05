@@ -1,6 +1,6 @@
 import React from 'react'
 
-import classNames from './Button.scss'
+import classNames from '../styles/components/Button.scss'
 
 export default function Button ({ onClick, children, ...props }) {
   return (

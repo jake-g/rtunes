@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import randomcolor from 'randomcolor'
 
-import classNames from './Item.scss'
+import classNames from '../styles/components/Item.scss'
 import { DEFAULT_POST_TITLE } from '../config'
 
 export default function Item ({ onClick, href, thumbnail, title, meta, active }) {
