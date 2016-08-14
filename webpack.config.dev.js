@@ -28,7 +28,7 @@ module.exports = {
       include: path.join(__dirname, 'data')
     }, {
       test: /\.scss$/,
-      loader: 'style!css?modules&sourceMap&localIdentName=[hash:base64:3]!sass?sourceMap',
+      loader: 'style!css?modules&sourceMap&localIdentName=[name]-[local]-[hash:base64:3]!sass?sourceMap',
       include: path.join(__dirname, 'src')
     }, {
       test: /\.css$/,
