@@ -138,33 +138,58 @@ export default class Playlist extends Component {
     if (activePost) {
       url = activePost.url
     }
-
     let style = getStyle()
-    const posts = this.getPosts()
-    var playlist = (
-      <div className="playlist" style={style.playlist}>
-        {this.renderPosts(posts)}
-        {posts &&
-          <Button disabled={!loadMore} onClick={loadMore}>
-            Load more
-          </Button>
-        }
+
+    var filter = (
+      <div className="header" style={style.header}>
+        {this.renderSortLinks(url)}
       </div>
     )
+
+    var stationsLink = (
+      <div className="header" style={style.header}>
+        <ul className={classNames.sort}>
+          <center>
+            <li><a href={url} target='_blank'>stations</a></li>
+          </center>
+        </ul>
+      </div>
+    )
+    const posts = this.getPosts()
+    var playlist = (
+      <div className="playlist-container">
+        {filter}
+        <div className="playlist" style={style.playlist}>
+          {this.renderPosts(posts)}
+          {posts &&
+            <Button disabled={!loadMore} onClick={loadMore}>
+              Load more
+            </Button>
+          }
+        </div>
+      </div>
+    )
+
+    var stations = (
+      <div className="staion-container">
+        {stationsLink}
+        <div className="stations" style={style.stations}>
+          <p>i dont give a fuck about youuuu. i don giva a fuck</p>
+        </div>
+      </div>
+    );
 
     // TODO make buttton to pop out player
     var player = (
       <Player activePost={activePost} style={style.footer} onSkip={this.skip} />
     )
-    var header = (
-      <div className="header" style={style.header}>
-        {this.renderSortLinks(url)}
-      </div>
-    )
+
     return (
       <div style={style.page}>
-        {header}
-        {playlist}
+        <div className="content" style={style.contents}>
+          {stations}
+          {playlist}
+        </div>
         {player}
       </div>
     )
@@ -182,11 +207,21 @@ function  getStyle() {
       display: 'flex',
       flexDirection: 'column',
     },
-    playlist: {
-      overflowY: 'scroll',
+    contents: {
       flex: 3,
+      display: 'flex',
+      flexDirection: 'row',
+    },
+    playlist: {
+      flex: 3,
+      overflowY: 'scroll',
       height: '85vh'
     },
-
+    stations: {
+      flex: '1 0 130px',
+      minWidth: '120px',
+      maxWidth: '150px',
+      overflowY: 'scroll'
+    }
   };
 }
