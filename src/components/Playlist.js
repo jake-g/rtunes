@@ -171,9 +171,10 @@ export default class Playlist extends Component {
   }
 }
 
+// TODO move header and footer (player) into App.js
 // TODO either use inline or scss...
 function  getStyle() {
-  // TODO this looks sketchy...need better way for header and footer
+  // TODO this looks sketchy...
   document.body.style.overflow = "hidden";
 
   return {
