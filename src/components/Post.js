@@ -38,7 +38,7 @@ export default class Post extends Component {
   renderComments ({ permalink, num_comments, author }) {
     return (
       <a key='comments' onClick={this.onLinkClick} href={permalink} target='_blank' title='View source on Reddit'>
-        {isNumber(num_comments) ? pluralize(num_comments, 'comment') : author}
+        {isNumber(num_comments) ? pluralize(num_comments, 'comment') : '0 comments'}
       </a>
     )
   }
@@ -49,8 +49,19 @@ export default class Post extends Component {
       </Link>
     )
   }
+  renderSource({url}) {
+    return (
+      <a key='source' onClick={this.onLinkClick} href={url} target='_blank' title='View source on Reddit'>
+        source
+      </a>
+    )
+  }
   renderMeta (post) {
-    let nodes = [ this.renderTime(post), SEPARATOR, this.renderComments(post) ]
+    let nodes = [
+      this.renderTime(post), SEPARATOR,
+      this.renderSource(post), SEPARATOR,
+      this.renderComments(post)
+    ]
     if (this.props.showSubreddit) {
       nodes = nodes.concat(SEPARATOR, this.renderSubreddit(post))
     }

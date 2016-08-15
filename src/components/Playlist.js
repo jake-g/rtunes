@@ -5,6 +5,7 @@ import { Link } from 'react-router'
 
 import classNames from '../styles/components/Playlist.scss'
 import Player from './Player'
+import Icon from './Icon'
 import Button from './Button'
 import Post from './Post'
 import Stations from './Stations'
@@ -18,7 +19,8 @@ export default class Playlist extends Component {
   state = {
     posts: {},
     loadMore: null,
-    activePost: null
+    activePost: null,
+    showStations: true
   };
   componentDidMount () {
     const { pathname, query } = this.props.location
@@ -101,13 +103,22 @@ export default class Playlist extends Component {
       />
     )
   };
-  renderSortLinks (url = '') {
+
+  toggleStations () {
+    this.setState({ showStations: !this.state.showStations})
+  }
+  //TODO make component for header
+  renderSortLinks () {
     const { subreddit, multi, username, post_id } = this.props.params
     if (subreddit && !post_id || multi) {
       const { pathname, search } = this.props.location
       const path = subreddit ? `/r/${subreddit}` : `/user/${username}/m/${multi}`
       return (
         <ul className={classNames.sort}>
+          <li> <button onClick={() => this.toggleStations()} ><Icon icon='menu' /></button> </li>
+          <li>{SEPARATOR}</li>
+          <li><Link to={'/'} >stations</Link></li>
+          <li>{SEPARATOR}</li>
           <li><Link to={path} activeClassName={classNames.activeSortLink}>hot</Link></li>
           <li><Link to={path + '/new'} activeClassName={classNames.activeSortLink}>new</Link></li>
           <li>{SEPARATOR}</li>
@@ -121,8 +132,7 @@ export default class Playlist extends Component {
               </li>
             )
           })}
-          <li>{SEPARATOR}</li>
-          <li><a href={url} target='_blank'>now playing</a></li>
+          {/*<li><a href={this.state.activePost.url} target='_blank'>now playing</a></li>*/}
           {/*<li>{SEPARATOR}</li>*/}
           {/*<li><a href={'https://www.reddit.com' + pathname + search} target='_blank'>reddit source</a></li>*/}
 
@@ -134,31 +144,19 @@ export default class Playlist extends Component {
   render () {
     const { loadMore, activePost } = this.state
 
-    //TODO fix hacky way to supply now playing url
-    let url
-    if (activePost) {
-      url = activePost.url
-    }
     let style = getStyle()
 
     var filter = (
       <div className="header" style={style.header}>
-        {this.renderSortLinks(url)}
+        {this.renderSortLinks()}
       </div>
     )
 
     // TODO make headeer alternate stations, threads,
-    var stationsLink = (
-      <div className="header" style={style.header}>
-        <ul className={classNames.sort}>
-          <li><Link to={'/'} >stations</Link></li>
-        </ul>
-      </div>
-    )
+
     const posts = this.getPosts()
     var playlist = (
       <div className="playlist-container">
-        {filter}
         <div className="playlist" style={style.playlist}>
           {this.renderPosts(posts)}
           {posts &&
@@ -170,12 +168,14 @@ export default class Playlist extends Component {
       </div>
     )
 
-    var stations = (
-      <div className="station-container" style={style.stations}>
-        {stationsLink}
-        <Stations />
-      </div>
-    );
+    let stations
+    if (this.state.showStations) {
+      stations = (
+        <div className="station-container" style={style.stations}>
+          <Stations />
+        </div>
+      );
+    }
 
     // TODO make buttton to pop out player
     var player = (
@@ -184,6 +184,7 @@ export default class Playlist extends Component {
 
     return (
       <div style={style.page}>
+        {filter}
         <div className="content" style={style.contents}>
           {stations}
           {playlist}
@@ -213,7 +214,7 @@ function  getStyle() {
       flexDirection: 'row',
     },
     playlist: {
-      flex: 3,
+      flex: 4,
       overflowY: 'scroll',
       height: '90vh'
     },
@@ -222,7 +223,7 @@ function  getStyle() {
       height: '30px'
     },
     stations: {
-      flex: '1 0 140px',
+      flex: '1 2 140px',
       minWidth: '120px',
       maxWidth: '160px',
       overflowY: 'scroll'
