@@ -33,9 +33,16 @@ function renderContent ({ thumbnail, title, meta }) {
     backgroundImage: thumbnail ? `url(${thumbnail})` : undefined,
     backgroundColor: randomcolor({ seed: title, luminosity: 'light' })
   }
+  let thumb = (
+    <div key='thumb' className={classNames.thumbnail} style={thumbStyle} />
+  )
+  if (thumbnail === null) {
+    thumb = null
+  }
+
   title = title || DEFAULT_POST_TITLE
   return [
-    <div key='thumb' className={classNames.thumbnail} style={thumbStyle} />,
+    thumb,
     <div key='info' className={classNames.info}>
       <div className={titleClass} title={title}>
         {title}

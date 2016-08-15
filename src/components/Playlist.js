@@ -7,6 +7,7 @@ import classNames from '../styles/components/Playlist.scss'
 import Player from './Player'
 import Button from './Button'
 import Post from './Post'
+import Stations from './Stations'
 import { APP_NAME, IGNORE_AUTHORS, DEFAULT_POST_TITLE, SEPARATOR } from '../config'
 
 export default class Playlist extends Component {
@@ -146,12 +147,11 @@ export default class Playlist extends Component {
       </div>
     )
 
+    // TODO make headeer alternate stations, threads, 
     var stationsLink = (
       <div className="header" style={style.header}>
         <ul className={classNames.sort}>
-          <center>
-            <li><a href={url} target='_blank'>stations</a></li>
-          </center>
+          <li><Link to={'/'} >stations</Link></li>
         </ul>
       </div>
     )
@@ -171,11 +171,9 @@ export default class Playlist extends Component {
     )
 
     var stations = (
-      <div className="staion-container">
+      <div className="station-container" style={style.stations}>
         {stationsLink}
-        <div className="stations" style={style.stations}>
-          <p>i dont give a fuck about youuuu. i don giva a fuck</p>
-        </div>
+        <Stations />
       </div>
     );
 
@@ -218,9 +216,9 @@ function  getStyle() {
       height: '85vh'
     },
     stations: {
-      flex: '1 0 130px',
+      flex: '1 0 140px',
       minWidth: '120px',
-      maxWidth: '150px',
+      maxWidth: '160px',
       overflowY: 'scroll'
     }
   };
