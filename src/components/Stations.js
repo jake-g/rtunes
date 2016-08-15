@@ -42,34 +42,22 @@ export default class Station extends Component {
   }
 
 // TODO make a saerch component
-// Paginate rather than show more
+// TODO Paginate rather than show more
   renderSearch (searchTerm) {
-    let searchBar = (
-      <input
-        type='text'
-        value={searchTerm}
-        onChange={this.onChangeSearch}
-        placeholder='search'
-        style={style.search}
-      />
-    )
-    let button = (
-      <button  style={style.icon} onClick={() => this.setState({ searchTerm: '' })} >
-        <Icon icon='search' />
-      </button>
-    )
-    if (searchTerm.length > 0) {
-      button = (
-        searchTerm &&
-          <button  style={style.icon} onClick={() => this.setState({ searchTerm: '' })} >
+    return (
+      <section style={style.search}>
+        <div style={style.searchIcon}><Icon  icon='search' /></div>
+        <input
+          type='text'
+          value={searchTerm}
+          onChange={this.onChangeSearch}
+          placeholder='search'
+        />
+        {searchTerm &&
+          <button style={style.clearSearch} onClick={() => this.setState({ searchTerm: '' })} >
             <Icon icon='clear' />
           </button>
-      )
-    }
-    return (
-      <section>
-        {searchBar}
-        {button}
+        }
       </section>
     )
   }
@@ -78,9 +66,9 @@ export default class Station extends Component {
     const { limitSubs, searchTerm } = this.state
     const subreddits = playlists.subreddits.filter(this.filterSubreddit)
     return (
-      <section style={style.list}>
+      <section>
       {this.renderSearch(searchTerm)}
-        <ul>
+        <ul style={style.list}>
           {subreddits
               .slice(0, limitSubs)
               .map(this.renderSubreddit)
@@ -90,7 +78,7 @@ export default class Station extends Component {
           }
         </ul>
       {subreddits.length > limitSubs &&
-        <Button onClick={() => this.setState({ limitSubs: limitSubs + 15 })}>
+        <Button style={{float: 'left'}} onClick={() => this.setState({ limitSubs: limitSubs + 15 })}>
           Show more
         </Button>
       }
@@ -102,10 +90,30 @@ export default class Station extends Component {
 
 const style = {
   search: {
-    width: '75%'
   },
   list: {
+    maxHeight: '80vh',
     overflowY: 'scroll',
-    height: '85vh'
+    fontWeight: '400',
+    lineHeight: '1',
+    fontSize: '11px'
+  },
+  search: {
+    display: 'flex',
+    alignItems: 'center',
+    maxWidth: '90%',
+    height: '30px',
+    marginBottom: '.5rem',
+    padding: '4px',
+    // background: 'lighten(#000, 97%)',
+    background: 'hsl(0, 0%, 97%)',
+    borderRadius: '2em',
+  },
+  searchIcon: {
+    marginLeft: '4px',
+    flexShrink: '0',
+  },
+  clearSearch: {
+    padding: '0',
   }
 }
