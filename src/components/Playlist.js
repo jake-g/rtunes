@@ -147,7 +147,7 @@ export default class Playlist extends Component {
       </div>
     )
 
-    // TODO make headeer alternate stations, threads, 
+    // TODO make headeer alternate stations, threads,
     var stationsLink = (
       <div className="header" style={style.header}>
         <ul className={classNames.sort}>
@@ -213,7 +213,11 @@ function  getStyle() {
     playlist: {
       flex: 3,
       overflowY: 'scroll',
-      height: '85vh'
+      height: '90vh'
+    },
+    footer: {
+      flex: '1 0 30px',
+      height: '30px'
     },
     stations: {
       flex: '1 0 140px',
