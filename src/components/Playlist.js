@@ -179,7 +179,7 @@ export default class Playlist extends Component {
 
     // TODO make buttton to pop out player
     var player = (
-      <Player activePost={activePost} style={style.footer} onSkip={this.skip} />
+      <Player className="player" activePost={activePost} style={style.footer} onSkip={this.skip} />
     )
 
     return (
@@ -200,6 +200,8 @@ function  getStyle() {
   // TODO this looks sketchy...
   document.body.style.overflow = "hidden";
 
+// TODO player needs to alway show noamtter what size
+// TODO hide stations if mobile
   return {
     page: {
       display: 'flex',

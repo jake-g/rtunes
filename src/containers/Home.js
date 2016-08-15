@@ -79,6 +79,8 @@ export default class Home extends Component {
   render () {
     const { limitSubs, limitGenres, searchTerm } = this.state
     const subreddits = playlists.subreddits.filter(this.filterSubreddit)
+    // TODO this looks sketchy...
+    document.body.style.overflow = "auto";
     return (
       <section>
         <h2>Discover</h2>
