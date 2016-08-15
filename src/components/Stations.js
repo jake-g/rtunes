@@ -29,7 +29,6 @@ export default class Station extends Component {
     return true
   };
 
-// meta={pluralize(subscribers, 'subscriber')}
   renderSubreddit ({ name, subscribers }) {
     return (
       <Item
@@ -41,6 +40,7 @@ export default class Station extends Component {
     )
   }
 
+// TODO add activeLinks with line under to toggle showing  what station mode (subred, thread, genre, custom)
 // TODO make a saerch component
 // TODO Paginate rather than show more
   renderSearch (searchTerm) {
@@ -74,7 +74,7 @@ export default class Station extends Component {
               .map(this.renderSubreddit)
           }
           {subreddits.length === 0 &&
-            <li>no subreddits found</li>
+            <li>no stations found</li>
           }
         </ul>
       {subreddits.length > limitSubs &&
@@ -94,9 +94,10 @@ const style = {
   list: {
     maxHeight: '80vh',
     overflowY: 'scroll',
-    fontWeight: '400',
+    fontWeight: '500',
     lineHeight: '1',
-    fontSize: '11px'
+    fontSize: '14px',
+    paddingLeft: '5px'
   },
   search: {
     display: 'flex',
