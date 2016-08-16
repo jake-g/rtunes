@@ -11,8 +11,8 @@ import { APP_NAME, APP_TAGLINE, SEPARATOR } from '../config'
 export default class Station extends Component {
 
   state = {
-    limitSubs: 25,
-    searchTerm: ''
+    limitSubs: 200,
+    searchTerm: '',
   };
 
   onChangeSearch = (e) => {
@@ -29,6 +29,19 @@ export default class Station extends Component {
     return true
   };
 
+// TODO mouseover show description
+  renderMulti ({ path, name, description }) {
+    return (
+      <Item
+        key={path}
+        href={path}
+        title={name}
+        thumbnail={null}
+      />
+    )
+  }
+
+  // TODO mouseover show subscribers (or description)
   renderSubreddit ({ name, subscribers }) {
     return (
       <Item
@@ -66,22 +79,19 @@ export default class Station extends Component {
     const { limitSubs, searchTerm } = this.state
     const subreddits = playlists.subreddits.filter(this.filterSubreddit)
     return (
-      <section>
-      {this.renderSearch(searchTerm)}
+      <section style={style.container}>
+        {this.renderSearch(searchTerm)}
         <ul style={style.list}>
-          {subreddits
-              .slice(0, limitSubs)
-              .map(this.renderSubreddit)
-          }
+          {subreddits.slice(0, limitSubs).map(this.renderSubreddit)}
           {subreddits.length === 0 &&
             <li>no stations found</li>
           }
         </ul>
-      {subreddits.length > limitSubs &&
-        <Button style={{float: 'left'}} onClick={() => this.setState({ limitSubs: limitSubs + 15 })}>
+        {subreddits.length > limitSubs &&
+        <Button style={{float: 'left'}} onClick={() => this.setState({ limitSubs: limitSubs + 100 })}>
           Show more
         </Button>
-      }
+        }
       </section>
 
     )
@@ -89,14 +99,13 @@ export default class Station extends Component {
 }
 
 const style = {
-  search: {
+  container: {
+    maxHeight: '90vh',
+    overflowY: 'scroll',
   },
   list: {
-    maxHeight: '80vh',
-    overflowY: 'scroll',
     fontWeight: '500',
-    lineHeight: '1',
-    fontSize: '14px',
+    lineHeight: '1.2',
     paddingLeft: '5px'
   },
   search: {
@@ -116,5 +125,5 @@ const style = {
   },
   clearSearch: {
     padding: '0',
-  }
+  },
 }

@@ -42,6 +42,7 @@ export default class Home extends Component {
         href={path}
         title={name}
         meta={description}
+        thumbnail={null}
       />
     )
   }
@@ -53,6 +54,7 @@ export default class Home extends Component {
         href={'/r/' + name}
         title={name}
         meta={pluralize(subscribers, 'subscriber')}
+        thumbnail={null}
       />
     )
   }
@@ -83,8 +85,8 @@ export default class Home extends Component {
     document.body.style.overflow = "auto";
     return (
       <section>
-        <h2>Discover</h2>
-        {playlists.discover.map(this.renderMulti)}
+        {/*<h2>Discover</h2>
+        {playlists.discover.map(this.renderMulti)}*/}
 
         <h2>Genres</h2>
         <ul className={classNames.genres}>

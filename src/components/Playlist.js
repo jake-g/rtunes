@@ -117,9 +117,9 @@ export default class Playlist extends Component {
         <ul className={classNames.sort}>
           <li> <button onClick={() => this.toggleStations()} ><Icon icon='menu' /></button> </li>
           <li>{SEPARATOR}</li>
-          <li><Link to={'/'} >stations</Link></li>
+          <li><Link to={'/'} >home</Link></li>
           <li>{SEPARATOR}</li>
-          <li><Link to={path} activeClassName={classNames.activeSortLink}>hot</Link></li>
+          <li><Link to={path + '/hot'} activeClassName={classNames.activeSortLink}>hot</Link></li>
           <li><Link to={path + '/new'} activeClassName={classNames.activeSortLink}>new</Link></li>
           <li>{SEPARATOR}</li>
           <li>top</li>
