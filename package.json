@@ -1,6 +1,9 @@
 {
   "name": "rtunes",
   "version": "0.0.1",
+  "engines": {
+    "node": "6.2.1"
+  }
   "description": "A React app to parse and play media from subreddits and comment threads.",
   "scripts": {
     "clean": "rimraf dist data",
