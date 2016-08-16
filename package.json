@@ -1,10 +1,10 @@
 {
   "name": "rtunes",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "node": "6.2.1"
-  }
-  "description": "A React app to parse and play media from subreddits and comment threads.",
+  },
+  "description": "A React app to play music from reddit. Based on Pete Cook <pete@cookpete.com> (http://github.com/cookpete)",
   "scripts": {
     "clean": "rimraf dist data",
     "start": "node server.js",
@@ -16,32 +16,10 @@
     "prebuild": "npm run clean && npm run fetch-playlists",
     "build": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "postinstall": "webpack --config webpack.config.prod.js  --progress --colors",
-    "postbuild": "cp index.html dist",
+    "postbuild": "cp index.html dist"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cookpete/rplayr.git"
-  },
-  "keywords": [
-    "react",
-    "rplayr",
-    "reddit",
-    "music",
-    "player",
-    "playlist",
-    "media",
-    "subreddit",
-    "comment",
-    "threads",
-    "youtube",
-    "soundcloud"
-  ],
-  "author": "Pete Cook <pete@cookpete.com> (http://github.com/cookpete)",
-  "license": "CC0-1.0",
-  "bugs": {
-    "url": "https://github.com/cookpete/rplayr/issues"
-  },
-  "homepage": "https://github.com/cookpete/rplayr",
+  "author": "Jake",
+  "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^6.3.1",
     "babel-cli": "^6.4.5",
