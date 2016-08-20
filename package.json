@@ -11,7 +11,7 @@
     "fetch-playlists": "babel-node scripts/fetch-playlists.js",
     "prebuild": "npm run clean && npm run fetch-playlists",
     "build": "NODE_ENV=production webpack --config webpack.config.prod.js",
-    "postinstall": "NODE_ENV=production webpack --config webpack.config.prod.js --progress --colors",
+    "postinstall": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "postbuild": "cp index.html dist"
   },
   "author": "Jake",
