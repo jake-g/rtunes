@@ -146,8 +146,8 @@ export default class Playlist extends Component {
 
     let style = getStyle()
 
-    var filter = (
-      <div className="header" style={style.header}>
+    var header = (
+      <div className="header" style={style.bar}>
         {this.renderSortLinks()}
       </div>
     )
@@ -179,12 +179,12 @@ export default class Playlist extends Component {
 
     // TODO make buttton to pop out player
     var player = (
-      <Player className="player" activePost={activePost} style={style.footer} onSkip={this.skip} />
+      <Player className="player" activePost={activePost} style={style.bar} onSkip={this.skip} />
     )
 
     return (
       <div style={style.page}>
-        {filter}
+        {header}
         <div className="content" style={style.contents}>
           {stations}
           {playlist}
@@ -207,6 +207,7 @@ function  getStyle() {
     page: {
       display: 'flex',
       flexDirection: 'column',
+      height: '100%'
     },
     contents: {
       flex: 3,
@@ -214,13 +215,12 @@ function  getStyle() {
       flexDirection: 'row',
     },
     playlist: {
-      flex: 4,
+      flex: 'auto',
       overflowY: 'scroll',
       height: '90vh'
     },
-    footer: {
-      flex: '1 0 30px',
-      height: '30px'
+    bar: {
+      height: '35px'
     },
     stations: {
       flex: '1 2 140px',

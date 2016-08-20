@@ -7,15 +7,11 @@
   "description": "A React app to play music from reddit. Based on Pete Cook <pete@cookpete.com> (http://github.com/cookpete)",
   "scripts": {
     "clean": "rimraf dist data",
-    "start": "node server.js",
+    "start": "NODE_ENV=production node server.js",
     "fetch-playlists": "babel-node scripts/fetch-playlists.js",
-    "lint": "npm run lint:js; npm run lint:css",
-    "lint:css": "scss-lint src",
-    "lint:js": "standard --verbose | snazzy",
-    "test": "NODE_ENV=production mocha --require ignore-styles test --compilers js:babel-core/register",
     "prebuild": "npm run clean && npm run fetch-playlists",
     "build": "NODE_ENV=production webpack --config webpack.config.prod.js",
-    "postinstall": "webpack --config webpack.config.prod.js  --progress --colors",
+    "postinstall": "NODE_ENV=production webpack --config webpack.config.prod.js --progress --colors",
     "postbuild": "cp index.html dist"
   },
   "author": "Jake",
@@ -61,10 +57,7 @@
     "react-dom": "^0.14.6",
     "react-player": "^0.5.3",
     "react-router": "^2.0.0-rc5",
-    "react-timeago": "^2.2.1",
-    "webpack": "^1.12.11",
-    "webpack-dev-middleware": "^1.4.0",
-    "webpack-hot-middleware": "^2.6.0"
+    "react-timeago": "^2.2.1"
   },
   "standard": {
     "parser": "babel-eslint"
