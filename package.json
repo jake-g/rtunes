@@ -11,7 +11,6 @@
     "fetch-playlists": "babel-node scripts/fetch-playlists.js",
     "prebuild": "npm run clean && npm run fetch-playlists",
     "build": "NODE_ENV=production webpack --config webpack.config.prod.js",
-    "postinstall": "webpack --config webpack.config.prod.js --progress --colors",
     "postbuild": "cp index.html dist"
   },
   "author": "Jake",
@@ -57,10 +56,7 @@
     "react-dom": "^0.14.6",
     "react-player": "^0.5.3",
     "react-router": "^2.0.0-rc5",
-    "react-timeago": "^2.2.1",
-    "webpack": "^1.12.11",
-    "webpack-dev-middleware": "^1.4.0",
-    "webpack-hot-middleware": "^2.6.0"
+    "react-timeago": "^2.2.1"
   },
   "standard": {
     "parser": "babel-eslint"
