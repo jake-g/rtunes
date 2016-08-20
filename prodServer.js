@@ -1,13 +1,11 @@
 var path = require('path');
 var express = require('express');
-
 var app = express();
-var port = 5000;
 var staticPath = path.join(__dirname, '/dist');
+
 app.use(express.static(staticPath));
-app.set('port', (process.env.PORT || port));
-var staticPath = path.join(__dirname, '/dist');
-app.use(express.static(staticPath));
+app.set('port', (process.env.PORT || 5000));
+
 
 //For avoidong Heroku $PORT error
 app.get('/dist', function(request, response) {
