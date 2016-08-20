@@ -69,4 +69,8 @@ export function updateFavicon (params, pathname) {
     const url = canvas.toDataURL('image/png')
     document.querySelector('link[rel="icon"]').setAttribute('href', url)
   }
+  // const svgString = '<g><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4 6h-3v7c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3c.55 0 1.06.16 1.5.42V6H16v2z"></path></g>'
+  // const url = 'data:image/svg+xml,'+encodeURIComponent(svgString);
+  // document.querySelector('link[rel="icon"]').setAttribute('href', url)
+
 }

@@ -1,5 +1,5 @@
-export const APP_NAME = 'tunes'
-export const APP_TAGLINE = 'create playlists from any reddit url'
+export const APP_NAME = 'rtunes'
+export const APP_TAGLINE = 'music'
 export const TRACKING_ID = ''
 export const IGNORE_AUTHORS = ['Mentioned_Videos', 'PlaylisterBot']
 export const DEFAULT_POST_TITLE = 'Untitled'
