@@ -1,18 +1,19 @@
 {
   "name": "rtunes",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "engines": {
     "node": "6.2.1"
   },
   "description": "A React app to play music from reddit. Based on Pete Cook <pete@cookpete.com> (http://github.com/cookpete)",
   "scripts": {
     "clean": "rimraf dist data",
-    "start": "node server.js",
-    "prod": "node prodServer.js",
+    "start": "node prodServer.js",
+    "dev": "node server.js",
     "fetch-playlists": "babel-node scripts/fetch-playlists.js",
     "prebuild": "npm run clean && npm run fetch-playlists",
     "build": "NODE_ENV=production webpack --config webpack.config.prod.js",
-    "postbuild": "cp index.html dist"
+    "postbuild": "cp index.html dist",
+    "deploy": "git push heroku -u master"
   },
   "author": "Jake",
   "license": "MIT",
