@@ -44,6 +44,7 @@ export default class TopThreads extends Component {
         key={id}
         href={url}
         title={title}
+        thumbnail={null}
         meta={pluralize(num_comments, 'comment')}
       />
     )

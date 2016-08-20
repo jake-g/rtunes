@@ -85,18 +85,6 @@ export default class Home extends Component {
     document.body.style.overflow = "auto";
     return (
       <section>
-        {/*<h2>Discover</h2>
-        {playlists.discover.map(this.renderMulti)}*/}
-
-        <h2>Genres</h2>
-        <ul className={classNames.genres}>
-          {playlists.genres.slice(0, limitGenres).map(this.renderMulti)}
-        </ul>
-        {playlists.genres.length > limitGenres &&
-          <Button onClick={() => this.setState({ limitGenres: playlists.genres.length })}>
-            Show all
-          </Button>
-        }
 
         <h2>Subreddits</h2>
         {this.renderSearch(searchTerm)}
@@ -114,6 +102,19 @@ export default class Home extends Component {
             Show more
           </Button>
         }
+
+        <h2>Genres</h2>
+        <ul className={classNames.genres}>
+          {playlists.genres.slice(0, limitGenres).map(this.renderMulti)}
+        </ul>
+        {playlists.genres.length > limitGenres &&
+          <Button onClick={() => this.setState({ limitGenres: playlists.genres.length })}>
+            Show all
+          </Button>
+        }
+
+        <h2>Discover</h2>
+        {playlists.discover.map(this.renderMulti)}
 
         <h2>Threads</h2>
         <TopThreads />
