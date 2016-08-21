@@ -79,7 +79,7 @@ export default class Station extends Component {
     const { limitSubs, searchTerm } = this.state
     const subreddits = playlists.subreddits.filter(this.filterSubreddit)
     return (
-      <section style={style.container}>
+      <section className="station-container"}>
         {this.renderSearch(searchTerm)}
         <ul style={style.list}>
           {subreddits.slice(0, limitSubs).map(this.renderSubreddit)}
@@ -99,10 +99,6 @@ export default class Station extends Component {
 }
 
 const style = {
-  container: {
-    // maxHeight: '90vh',
-    overflowY: 'scroll',
-  },
   list: {
     fontWeight: '500',
     lineHeight: '1.2',

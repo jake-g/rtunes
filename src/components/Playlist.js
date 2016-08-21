@@ -216,7 +216,7 @@ function  getStyle() {
       paddingBottom: '40px'
     },
     playlist: {
-      overflow: 'scroll',
+      overflowY: 'scroll',
       flex: '2 1 500px',
       // height: '90vh'
     },
