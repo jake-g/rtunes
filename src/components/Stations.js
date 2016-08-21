@@ -88,7 +88,7 @@ export default class Station extends Component {
           }
         </ul>
         {subreddits.length > limitSubs &&
-        <Button style={{float: 'left'}} onClick={() => this.setState({ limitSubs: limitSubs + 100 })}>
+        <Button onClick={() => this.setState({ limitSubs: limitSubs + 100 })}>
           Show more
         </Button>
         }
@@ -100,7 +100,7 @@ export default class Station extends Component {
 
 const style = {
   container: {
-    maxHeight: '90vh',
+    // maxHeight: '90vh',
     overflowY: 'scroll',
   },
   list: {
@@ -113,6 +113,7 @@ const style = {
     alignItems: 'center',
     maxWidth: '90%',
     height: '30px',
+    margin: 'auto',
     marginBottom: '.5rem',
     padding: '4px',
     // background: 'lighten(#000, 97%)',

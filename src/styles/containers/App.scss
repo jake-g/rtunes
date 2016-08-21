@@ -1,13 +1,15 @@
 @import '../variables';
 
 .app {
-  max-width: 95%;
+  // max-width: 95%;
   line-height: 1.4;
   margin: auto;
-  padding: $spacing;
+  padding: 2px 10px 2px 10px;
   font-family: $font-family;
   font-size: $font-size;
   font-weight: 300;
+  min-height: 250px;
+  min-width: 450px;
 }
 
 .header {

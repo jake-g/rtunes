@@ -115,6 +115,7 @@ export default class Playlist extends Component {
       const path = subreddit ? `/r/${subreddit}` : `/user/${username}/m/${multi}`
       return (
         <ul className={classNames.sort}>
+          <li> <Icon icon='genres' /></li>
           <li> <button onClick={() => this.toggleStations()} ><Icon icon='menu' /></button> </li>
           <li>{SEPARATOR}</li>
           <li><Link to={'/'} >home</Link></li>
@@ -147,7 +148,7 @@ export default class Playlist extends Component {
     let style = getStyle()
 
     var header = (
-      <div className="header" style={style.bar}>
+      <div className="header" style={style.header}>
         {this.renderSortLinks()}
       </div>
     )
@@ -156,15 +157,13 @@ export default class Playlist extends Component {
 
     const posts = this.getPosts()
     var playlist = (
-      <div className="playlist-container">
-        <div className="playlist" style={style.playlist}>
+      <div className="playlist" style={style.playlist}>
           {this.renderPosts(posts)}
           {posts &&
             <Button disabled={!loadMore} onClick={loadMore}>
               Load more
             </Button>
           }
-        </div>
       </div>
     )
 
@@ -179,7 +178,9 @@ export default class Playlist extends Component {
 
     // TODO make buttton to pop out player
     var player = (
-      <Player className="player" activePost={activePost} style={style.bar} onSkip={this.skip} />
+      <div className="player" style={style.footer}>
+        <Player activePost={activePost} onSkip={this.skip} />
+      </div>
     )
 
     return (
@@ -205,28 +206,34 @@ function  getStyle() {
 // TODO hide stations if mobile
   return {
     page: {
-      display: 'flex',
-      flexDirection: 'column',
       height: '100%'
     },
     contents: {
-      flex: 3,
+      flex: 'auto',
       display: 'flex',
       flexDirection: 'row',
+      height: '90vh',
+      paddingBottom: '40px'
     },
     playlist: {
-      flex: 'auto',
-      overflowY: 'scroll',
-      height: '90vh'
+      overflow: 'scroll',
+      flex: '2 1 500px',
+      // height: '90vh'
     },
-    bar: {
+    header: {
       height: '35px'
+    },
+    footer: {
+      position: 'fixed',
+      bottom: '3px',
+      width: '100%'
     },
     stations: {
       flex: '1 2 140px',
       minWidth: '120px',
       maxWidth: '160px',
       overflowY: 'scroll'
-    }
+    },
+
   };
 }

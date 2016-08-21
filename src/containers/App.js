@@ -21,13 +21,6 @@ export default class App extends Component {
   render () {
     return (
       <div className={classNames.app}>
-        {/*<header className={classNames.header}>
-          <h1 className={classNames.title}>
-            <Link to='/'>
-              {APP_NAME}
-            </Link>
-          </h1>
-        </header>*/}
         {this.props.children}
       </div>
     )
