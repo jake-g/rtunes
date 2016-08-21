@@ -13,10 +13,10 @@ export default class App extends Component {
   };
   componentDidMount () {
     const { params, location } = this.props
-    updateFavicon(params, location.pathname)
+    // updateFavicon(params, location.pathname)
   }
   componentWillReceiveProps ({ params, location }) {
-    updateFavicon(params, location.pathname)
+    // updateFavicon(params, location.pathname)
   }
   render () {
     return (

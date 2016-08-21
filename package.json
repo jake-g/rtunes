@@ -12,7 +12,7 @@
     "fetch-playlists": "babel-node scripts/fetch-playlists.js",
     "prebuild": "npm run clean && npm run fetch-playlists",
     "build": "NODE_ENV=production webpack --config webpack.config.prod.js",
-    "postbuild": "cp index.html dist",
+    "postbuild": "cp index.html dist && cp images/favicon.ico dist",
     "deploy": "git push heroku -u master"
   },
   "author": "Jake",
