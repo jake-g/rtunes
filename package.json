@@ -8,7 +8,7 @@
   "scripts": {
     "clean": "rimraf dist data",
     "start": "node prodServer.js",
-    "dev": "node server.js",
+    "dev": "node devServer.js",
     "fetch-playlists": "babel-node scripts/fetch-playlists.js",
     "prebuild": "npm run clean && npm run fetch-playlists",
     "build": "NODE_ENV=production webpack --config webpack.config.prod.js",
