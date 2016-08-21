@@ -86,7 +86,7 @@ export default class Home extends Component {
     return (
       <section>
 
-        <h2>Subreddits</h2>
+        <h2>Playlists</h2>
         {this.renderSearch(searchTerm)}
         <ul className={classNames.subreddits}>
           {subreddits
