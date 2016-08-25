@@ -1,6 +1,10 @@
 @import '../variables';
 @import '../mixins';
 
+.home {
+  padding: 0px 40px;
+}
+
 .columns {
   @include desktop {
     display: flex;

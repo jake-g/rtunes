@@ -84,9 +84,11 @@ export default class Home extends Component {
     // TODO this looks sketchy...
     document.body.style.overflow = "auto";
     return (
-      <section>
-
-        <h2>Playlists</h2>
+      <section className={classNames.home}>
+        <h2>
+          <Icon icon='playlist' />
+          Playlists
+        </h2>
         {this.renderSearch(searchTerm)}
         <ul className={classNames.subreddits}>
           {subreddits
@@ -103,7 +105,10 @@ export default class Home extends Component {
           </Button>
         }
 
-        <h2>Genres</h2>
+        <h2>
+          <Icon icon='genres' />
+          Genres
+        </h2>
         <ul className={classNames.genres}>
           {playlists.genres.slice(0, limitGenres).map(this.renderMulti)}
         </ul>
@@ -113,10 +118,16 @@ export default class Home extends Component {
           </Button>
         }
 
-        <h2>Discover</h2>
+        <h2>
+          <Icon icon='discover' />
+          Discover
+        </h2>
         {playlists.discover.map(this.renderMulti)}
 
-        <h2>Threads</h2>
+        <h2>
+          <Icon icon='threads' />
+          Threads
+        </h2>
         <TopThreads />
       </section>
     )
