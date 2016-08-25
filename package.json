@@ -1,6 +1,6 @@
 {
   "name": "rtunes",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "engines": {
     "node": "6.2.1"
   },
@@ -8,6 +8,7 @@
   "scripts": {
     "clean": "rimraf dist data",
     "lint": "eslint src && scss-lint src",
+    "lint-fix": "eslint src --fix",
     "start": "node prodServer.js",
     "dev": "node devServer.js",
     "fetch-playlists": "babel-node scripts/fetch-playlists.js",
@@ -29,7 +30,7 @@
     "babel-preset-react-hmre": "^1.0.1",
     "babel-preset-stage-0": "^6.3.13",
     "css-loader": "^0.23.1",
-    "eslint": "^3.3.1",
+    "eslint": "^2.13.1",
     "eslint-config-airbnb": "^4.0.0",
     "eslint-plugin-babel": "^3.0.0",
     "eslint-plugin-react": "^3.16.1",

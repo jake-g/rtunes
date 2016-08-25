@@ -1,11 +1,11 @@
-import React from 'react'
-import { isNumber } from '../utils'
+import React from 'react';
+import { isNumber } from '../utils';
 
-import classNames from '../styles/components/Range.scss'
+import classNames from '../styles/components/Range.scss';
 
-const THUMB_WIDTH = 10
+const THUMB_WIDTH = 10;
 
-export default function Range ({
+export default function Range({
   className = '',
   primary,
   secondary,
@@ -22,16 +22,16 @@ export default function Range ({
       <div className={classNames.primary} style={{ width: `calc(${primary * 100}% - ${primary * THUMB_WIDTH}px)` }} />
       <input
         className={classNames.input}
-        type='range' min={0} max={1} step='any'
+        type="range" min={0} max={1} step="any"
         value={primary}
         onMouseDown={(e) => onSeekStart(getValue(e))}
         onChange={(e) => onSeekChange(getValue(e))}
         onMouseUp={(e) => onSeekEnd(getValue(e))}
       />
     </div>
-  )
+  );
 }
 
-function getValue (e) {
-  return parseFloat(e.target.value)
+function getValue(e) {
+  return parseFloat(e.target.value);
 }

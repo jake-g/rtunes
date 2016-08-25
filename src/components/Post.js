@@ -1,10 +1,10 @@
-import React, { Component, PropTypes } from 'react'
-import TimeAgo from 'react-timeago'
-import { Link } from 'react-router'
+import React, { Component, PropTypes } from 'react';
+import TimeAgo from 'react-timeago';
+import { Link } from 'react-router';
 
-import Item from './Item'
-import { pluralize, isNumber, decode } from '../utils'
-import { SEPARATOR } from '../config'
+import Item from './Item';
+import { pluralize, isNumber, decode } from '../utils';
+import { SEPARATOR } from '../config';
 
 export default class Post extends Component {
   static propTypes = {
@@ -13,62 +13,62 @@ export default class Post extends Component {
     playing: PropTypes.bool,
     showSubreddit: PropTypes.bool
   };
-  shouldComponentUpdate (nextProps) {
+  shouldComponentUpdate(nextProps) {
     return (
       this.props.post.id !== nextProps.post.id ||
       this.props.playing !== nextProps.playing
-    )
+    );
   }
   onPlay = () => this.props.onPlay(this.props.post);
-  onLinkClick (e) {
+  onLinkClick(e) {
     // Prevent playing media on link click
-    e.stopPropagation()
+    e.stopPropagation();
   }
-  renderTime ({ created }) {
+  renderTime({ created }) {
     return (
       <TimeAgo
-        key='time'
+        key="time"
         date={created}
-        component='time'
+        component="time"
         dateTime={created.toISOString()}
         title={created.toString()}
       />
-    )
+    );
   }
-  renderComments ({ permalink, num_comments, author }) {
+  renderComments({ permalink, num_comments, author }) {
     return (
-      <a key='comments' onClick={this.onLinkClick} href={permalink} target='_blank' title='View source on Reddit'>
+      <a key="comments" onClick={this.onLinkClick} href={permalink} target="_blank" title="View source on Reddit">
         {isNumber(num_comments) ? pluralize(num_comments, 'comment') : '0 comments'}
       </a>
-    )
+    );
   }
-  renderSubreddit ({ subreddit }) {
+  renderSubreddit({ subreddit }) {
     return (
-      <Link key='subreddit' onClick={this.onLinkClick} to={'/r/' + subreddit} title='View source on Reddit'>
+      <Link key="subreddit" onClick={this.onLinkClick} to={'/r/' + subreddit} title="View source on Reddit">
         {subreddit}
       </Link>
-    )
+    );
   }
-  renderSource({url}) {
+  renderSource({ url }) {
     return (
-      <a key='source' onClick={this.onLinkClick} href={url} target='_blank' title='View source on Reddit'>
+      <a key="source" onClick={this.onLinkClick} href={url} target="_blank" title="View source on Reddit">
         source
       </a>
-    )
+    );
   }
-  renderMeta (post) {
+  renderMeta(post) {
     let nodes = [
       this.renderTime(post), SEPARATOR,
       this.renderSource(post), SEPARATOR,
       this.renderComments(post)
-    ]
+    ];
     if (this.props.showSubreddit) {
-      nodes = nodes.concat(SEPARATOR, this.renderSubreddit(post))
+      nodes = nodes.concat(SEPARATOR, this.renderSubreddit(post));
     }
-    return nodes
+    return nodes;
   }
-  render () {
-    const { post, playing } = this.props
+  render() {
+    const { post, playing } = this.props;
     return (
       <Item
         onClick={this.onPlay}
@@ -77,6 +77,6 @@ export default class Post extends Component {
         meta={this.renderMeta(post)}
         active={playing}
       />
-    )
+    );
   }
 }

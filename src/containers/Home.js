@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import classNames from '../styles/containers/Home.scss'
-import playlists from '../../data/playlists.json'
-import TopThreads from '../components/TopThreads'
-import Item from '../components/Item'
-import Icon from '../components/Icon'
-import Button from '../components/Button'
-import { pluralize } from '../utils'
-import { APP_NAME, APP_TAGLINE, SEPARATOR } from '../config'
+import classNames from '../styles/containers/Home.scss';
+import playlists from '../../data/playlists.json';
+import TopThreads from '../components/TopThreads';
+import Item from '../components/Item';
+import Icon from '../components/Icon';
+import Button from '../components/Button';
+import { pluralize } from '../utils';
+import { APP_NAME, APP_TAGLINE, SEPARATOR } from '../config';
 
 export default class Home extends Component {
 
@@ -17,25 +17,25 @@ export default class Home extends Component {
     searchTerm: ''
   };
 
-  componentDidMount () {
-    document.title = `${APP_NAME}${SEPARATOR}${APP_TAGLINE}`
+  componentDidMount() {
+    document.title = `${APP_NAME}${SEPARATOR}${APP_TAGLINE}`;
   }
 
   onChangeSearch = (e) => {
     this.setState({
       searchTerm: e.target.value
-    })
+    });
   };
 
   filterSubreddit = ({ name }) => {
-    const { searchTerm } = this.state
+    const { searchTerm } = this.state;
     if (searchTerm.length > 1) {
-      return name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+      return name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1;
     }
-    return true
+    return true;
   };
 
-  renderMulti ({ path, name, description }) {
+  renderMulti({ path, name, description }) {
     return (
       <Item
         key={path}
@@ -44,10 +44,10 @@ export default class Home extends Component {
         meta={description}
         thumbnail={null}
       />
-    )
+    );
   }
 
-  renderSubreddit ({ name, subscribers }) {
+  renderSubreddit({ name, subscribers }) {
     return (
       <Item
         key={name}
@@ -56,37 +56,37 @@ export default class Home extends Component {
         meta={pluralize(subscribers, 'subscriber')}
         thumbnail={null}
       />
-    )
+    );
   }
 
-  renderSearch (searchTerm) {
+  renderSearch(searchTerm) {
     return (
       <section className={classNames.search}>
-        <Icon icon='search' className={classNames.searchIcon} />
+        <Icon icon="search" className={classNames.searchIcon} />
         <input
-          type='text'
+          type="text"
           value={searchTerm}
           onChange={this.onChangeSearch}
-          placeholder='search'
+          placeholder="search"
         />
         {searchTerm &&
           <button onClick={() => this.setState({ searchTerm: '' })} className={classNames.clearSearch}>
-            <Icon icon='clear' />
+            <Icon icon="clear" />
           </button>
         }
       </section>
-    )
+    );
   }
 
-  render () {
-    const { limitSubs, limitGenres, searchTerm } = this.state
-    const subreddits = playlists.subreddits.filter(this.filterSubreddit)
+  render() {
+    const { limitSubs, limitGenres, searchTerm } = this.state;
+    const subreddits = playlists.subreddits.filter(this.filterSubreddit);
     // TODO this looks sketchy...
-    document.body.style.overflow = "auto";
+    document.body.style.overflow = 'auto';
     return (
       <section className={classNames.home}>
         <h2>
-          <Icon icon='playlist' />
+          <Icon icon="playlist" />
           Playlists
         </h2>
         {this.renderSearch(searchTerm)}
@@ -106,7 +106,7 @@ export default class Home extends Component {
         }
 
         <h2>
-          <Icon icon='genres' />
+          <Icon icon="genres" />
           Genres
         </h2>
         <ul className={classNames.genres}>
@@ -119,17 +119,17 @@ export default class Home extends Component {
         }
 
         <h2>
-          <Icon icon='discover' />
+          <Icon icon="discover" />
           Discover
         </h2>
         {playlists.discover.map(this.renderMulti)}
 
         <h2>
-          <Icon icon='threads' />
+          <Icon icon="threads" />
           Threads
         </h2>
         <TopThreads />
       </section>
-    )
+    );
   }
 }

@@ -1,10 +1,10 @@
-import React, { Component, PropTypes } from 'react'
-import ReactPlayer from 'react-player'
+import React, { Component, PropTypes } from 'react';
+import ReactPlayer from 'react-player';
 
-import classNames from '../styles/components/Player.scss'
-import Range from './Range'
-import Icon from './Icon'
-import Duration from './Duration'
+import classNames from '../styles/components/Player.scss';
+import Range from './Range';
+import Icon from './Icon';
+import Duration from './Duration';
 
 export default class Player extends Component {
   static propTypes = {
@@ -18,66 +18,66 @@ export default class Player extends Component {
     loaded: 0,
     duration: 0
   };
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (this.props.activePost !== nextProps.activePost) {
       this.setState({
         playing: true,
         played: 0,
         loaded: 0
-      })
+      });
     }
   }
   onPlayerPlay = () => {
-    this.setState({ playing: true })
+    this.setState({ playing: true });
   };
   onPlayerPause = () => {
-    this.setState({ playing: false }) // TODO: Fix YT firing onPause when ending
+    this.setState({ playing: false }); // TODO: Fix YT firing onPause when ending
   };
   onPlayerProgress = (state) => {
-    this.setState(this.state.seeking ? {} : state)
+    this.setState(this.state.seeking ? {} : state);
   };
   onPlayerDuration = (duration) => {
-    this.setState({ duration })
+    this.setState({ duration });
   };
   onPlayerEnded = () => {
-    this.props.onSkip()
+    this.props.onSkip();
   };
   onPlayerError = () => {
-    this.props.onSkip()
+    this.props.onSkip();
   };
   onTogglePlaying = () => {
-    this.setState({ playing: !this.state.playing })
+    this.setState({ playing: !this.state.playing });
   };
   onClickNext = () => {
-    this.props.onSkip()
+    this.props.onSkip();
   };
   onClickPrev = () => {
-    this.props.onSkip(-1)
+    this.props.onSkip(-1);
   };
   onSetVolume = (volume) => {
-    this.setState({ volume })
+    this.setState({ volume });
   };
   onSeekStart = () => {
-    this.setState({ seeking: true })
+    this.setState({ seeking: true });
   };
   onSeekChange = (fraction) => {
-    this.setState({ played: fraction })
+    this.setState({ played: fraction });
   };
   onSeekEnd = (fraction) => {
-    this.setState({ seeking: false })
-    this.refs.player.seekTo(fraction)
+    this.setState({ seeking: false });
+    this.refs.player.seekTo(fraction);
   };
-  render () {
-    const { activePost } = this.props
-    const { playing, volume, duration, played, loaded } = this.state
+  render() {
+    const { activePost } = this.props;
+    const { playing, volume, duration, played, loaded } = this.state;
     return (
       <div>
         <section className={classNames.playerWrapper}>
           <ReactPlayer
-            ref='player'
+            ref="player"
             className={classNames.player}
-            width='100%'
-            height='100%'
+            width="100%"
+            height="100%"
             url={activePost ? activePost.url : null}
             playing={playing}
             volume={volume}
@@ -92,13 +92,13 @@ export default class Player extends Component {
         </section>
         <section className={activePost ? classNames.controls : classNames.disabledControls}>
           <button onClick={this.onClickPrev}>
-            <Icon icon='prev' />
+            <Icon icon="prev" />
           </button>
           <button onClick={this.onTogglePlaying}>
             <Icon icon={playing ? 'pause' : 'play'} />
           </button>
           <button onClick={this.onClickNext}>
-            <Icon icon='next' />
+            <Icon icon="next" />
           </button>
           <Duration className={classNames.duration} seconds={duration * played} />
           <Range
@@ -110,7 +110,7 @@ export default class Player extends Component {
             onSeekEnd={this.onSeekEnd}
           />
           <Duration className={classNames.duration} seconds={duration} />
-          <Icon icon='volume' className={classNames.volumeIcon} />
+          <Icon icon="volume" className={classNames.volumeIcon} />
           <Range
             className={classNames.volumeSlider}
             primary={volume}
@@ -118,6 +118,6 @@ export default class Player extends Component {
           />
         </section>
       </div>
-    )
+    );
   }
 }

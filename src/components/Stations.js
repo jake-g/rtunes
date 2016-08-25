@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import playlists from '../../data/playlists.json'
-import TopThreads from './TopThreads'
-import Item from './Item'
-import Icon from './Icon'
-import Button from './Button'
-import { pluralize } from '../utils'
-import { APP_NAME, APP_TAGLINE, SEPARATOR } from '../config'
+import playlists from '../../data/playlists.json';
+import TopThreads from './TopThreads';
+import Item from './Item';
+import Icon from './Icon';
+import Button from './Button';
+import { pluralize } from '../utils';
+import { APP_NAME, APP_TAGLINE, SEPARATOR } from '../config';
 
 export default class Station extends Component {
 
@@ -18,19 +18,19 @@ export default class Station extends Component {
   onChangeSearch = (e) => {
     this.setState({
       searchTerm: e.target.value
-    })
+    });
   };
 
   filterSubreddit = ({ name }) => {
-    const { searchTerm } = this.state
+    const { searchTerm } = this.state;
     if (searchTerm.length > 1) {
-      return name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+      return name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1;
     }
-    return true
+    return true;
   };
 
 // TODO mouseover show description
-  renderMulti ({ path, name, description }) {
+  renderMulti({ path, name, description }) {
     return (
       <Item
         key={path}
@@ -38,11 +38,11 @@ export default class Station extends Component {
         title={name}
         thumbnail={null}
       />
-    )
+    );
   }
 
   // TODO mouseover show subscribers (or description)
-  renderSubreddit ({ name, subscribers }) {
+  renderSubreddit({ name, subscribers }) {
     return (
       <Item
         key={name}
@@ -50,34 +50,34 @@ export default class Station extends Component {
         title={name}
         thumbnail={null}
       />
-    )
+    );
   }
 
 // TODO add activeLinks with line under to toggle showing  what station mode (subred, thread, genre, custom)
 // TODO make a saerch component
 // TODO Paginate rather than show more
-  renderSearch (searchTerm) {
+  renderSearch(searchTerm) {
     return (
       <section style={style.search}>
-        <div style={style.searchIcon}><Icon  icon='search' /></div>
+        <div style={style.searchIcon}><Icon icon="search" /></div>
         <input
-          type='text'
+          type="text"
           value={searchTerm}
           onChange={this.onChangeSearch}
-          placeholder='search'
+          placeholder="search"
         />
         {searchTerm &&
           <button style={style.clearSearch} onClick={() => this.setState({ searchTerm: '' })} >
-            <Icon icon='clear' />
+            <Icon icon="clear" />
           </button>
         }
       </section>
-    )
+    );
   }
 
-  render () {
-    const { limitSubs, searchTerm } = this.state
-    const subreddits = playlists.subreddits.filter(this.filterSubreddit)
+  render() {
+    const { limitSubs, searchTerm } = this.state;
+    const subreddits = playlists.subreddits.filter(this.filterSubreddit);
     return (
       <section className="station-container">
         {this.renderSearch(searchTerm)}
@@ -94,7 +94,7 @@ export default class Station extends Component {
         }
       </section>
 
-    )
+    );
   }
 }
 
@@ -123,4 +123,4 @@ const style = {
   clearSearch: {
     padding: '0',
   },
-}
+};
