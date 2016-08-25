@@ -79,7 +79,7 @@ export default class Station extends Component {
     const { limitSubs, searchTerm } = this.state
     const subreddits = playlists.subreddits.filter(this.filterSubreddit)
     return (
-      <section className="station-container"}>
+      <section className="station-container">
         {this.renderSearch(searchTerm)}
         <ul style={style.list}>
           {subreddits.slice(0, limitSubs).map(this.renderSubreddit)}
@@ -117,7 +117,7 @@ const style = {
     borderRadius: '2em',
   },
   searchIcon: {
-    marginLeft: '4px',
+    fill: 'hsl(0, 0%, 75%)',
     flexShrink: '0',
   },
   clearSearch: {

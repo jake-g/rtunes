@@ -80,7 +80,9 @@ export default class Playlist extends Component {
   };
   renderPosts (posts) {
     if (!posts) {
-      return 'Loading…'
+      return (
+        <center><b>Loading…</b></center>
+      )
     }
     if (posts.length === 0) {
       return 'No playable media found.'
@@ -115,7 +117,7 @@ export default class Playlist extends Component {
       const path = subreddit ? `/r/${subreddit}` : `/user/${username}/m/${multi}`
       return (
         <ul className={classNames.sort}>
-          <li> <Icon icon='genres' /></li>
+          <li> <Icon icon='logo' /></li>
           <li> <button onClick={() => this.toggleStations()} ><Icon icon='menu' /></button> </li>
           <li>{SEPARATOR}</li>
           <li><Link to={'/'} >home</Link></li>
@@ -212,8 +214,8 @@ function  getStyle() {
       flex: 'auto',
       display: 'flex',
       flexDirection: 'row',
-      height: '90vh',
-      paddingBottom: '40px'
+      height: '98%',
+      paddingBottom: '60px'
     },
     playlist: {
       overflowY: 'scroll',
@@ -226,7 +228,7 @@ function  getStyle() {
     footer: {
       position: 'fixed',
       bottom: '3px',
-      width: '100%'
+      width: '98%'
     },
     stations: {
       flex: '1 2 140px',

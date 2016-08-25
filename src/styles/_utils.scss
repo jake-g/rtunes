@@ -5,7 +5,7 @@
 }
 
 @mixin desktop {
-  @media (min-width: 420px) {
+  @media (min-width: $break-desktop) {
     @content;
   }
 }

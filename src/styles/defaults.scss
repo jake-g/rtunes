@@ -11,6 +11,11 @@
     font-weight: 500;
   }
 
+  body {
+    min-height: $min-win-height;
+    min-width: $min-win-width;
+  }
+
   h1,
   h2 {
     margin-bottom: $spacing;
