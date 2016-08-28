@@ -220,6 +220,7 @@ function getStyle() {
     playlist: {
       overflowY: 'scroll',
       flex: '2 1 500px',
+      paddingLeft: '5px'
       // height: '90vh'
     },
     header: {
