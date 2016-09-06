@@ -154,7 +154,6 @@ export default class Playlist extends Component {
   }
   render() {
     const { loadMore, activePost } = this.state;
-    const title = activePost ? activePost.title : null;
     let style = getStyle();
 
     var header = (
@@ -184,11 +183,14 @@ export default class Playlist extends Component {
       );
     }
 
-    var info = (
-      <ul className={classNames.title} >
-        <li><a href={'/'} target='_blank'>{title}</a></li>
-      </ul>
-    );
+    let info;
+    if (activePost) {
+      info = (
+        <ul className={classNames.title} >
+          <li><a href={activePost.url} target='_blank'>{activePost.title}</a></li>
+        </ul>
+      );
+    }
 
     var player = (
       <div className="player" style={style.footer}>
