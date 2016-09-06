@@ -78,6 +78,12 @@ export default class Station extends Component {
   render() {
     const { limitSubs, searchTerm } = this.state;
     const subreddits = playlists.subreddits.filter(this.filterSubreddit);
+    // var currentPlaylist = (
+    //   <div style={style.title}>
+    //     this.renderSubreddit({name: 'FUCK ME'})
+    //   </div>
+    // )
+    //TODO put currentPlaylist above stition list and have it represent selected thread
     return (
       <section className="station-container">
         {this.renderSearch(searchTerm)}
@@ -123,4 +129,7 @@ const style = {
   clearSearch: {
     padding: '0',
   },
+  title: {
+    color: '#000'
+  }
 };
