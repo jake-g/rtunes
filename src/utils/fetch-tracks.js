@@ -163,7 +163,7 @@ function getThumbnail (post, url = post.url) {
   const matchYouTube = url.match(MATCH_YOUTUBE_URL)
   if (matchYouTube) {
     const id = matchYouTube[1]
-    return `http://img.youtube.com/vi/${id}/default.jpg`
+    return `https://img.youtube.com/vi/${id}/default.jpg`
   }
   return null
 }
