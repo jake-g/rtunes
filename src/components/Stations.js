@@ -5,7 +5,7 @@ import TopThreads from './TopThreads';
 import Item from './Item';
 import Icon from './Icon';
 import Button from './Button';
-import { pluralize } from '../utils';
+import { pluralize } from '../utils/utils';
 import { APP_NAME, APP_TAGLINE, SEPARATOR } from '../config';
 
 export default class Station extends Component {

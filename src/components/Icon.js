@@ -47,6 +47,8 @@ function renderGraphic(icon) {
       return (<g><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"></path></g>);
     case 'genres':
       return (<g><path d="M7 4H5v5h2V4zm12 0h-2v9h2V4zM3 13h2v7h2v-7h2v-2H3v2zm12-6h-2V4h-2v3H9v2h6V7zm-4 13h2v-9h-2v9zm4-5v2h2v3h2v-3h2v-2h-6z"></path></g>);
+    case 'video':
+      return (<g><path d="M7 14h-2v5h5v-2h-3v-3zm-2-4h2v-3h3v-2h-5v5zm12 7h-3v2h5v-5h-2v3zm-3-12v2h3v3h2v-5h-5z"></path></g>);
   }
 }
 

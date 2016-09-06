@@ -13,6 +13,7 @@ export default class Player extends Component {
   };
   state = {
     playing: false,
+    video: false,
     volume: 0.8,
     played: 0,
     loaded: 0,
@@ -48,6 +49,9 @@ export default class Player extends Component {
   onTogglePlaying = () => {
     this.setState({ playing: !this.state.playing });
   };
+  onToggleVideo = () => {
+    this.setState({ video: !this.state.video });
+  };
   onClickNext = () => {
     this.props.onSkip();
   };
@@ -70,9 +74,10 @@ export default class Player extends Component {
   render() {
     const { activePost } = this.props;
     const { playing, volume, duration, played, loaded } = this.state;
+    const style = getStyle(this.state.video)
     return (
       <div>
-        <section className={classNames.playerWrapper}>
+        <section className={classNames.playerWrapper} style={style.wrapper}>
           <ReactPlayer
             ref="player"
             className={classNames.player}
@@ -100,6 +105,9 @@ export default class Player extends Component {
           <button onClick={this.onClickNext}>
             <Icon icon="next" />
           </button>
+          <button onClick={this.onToggleVideo}>
+            <Icon icon="video" />
+          </button>
           <Duration className={classNames.duration} seconds={duration * played} />
           <Range
             className={classNames.timeSlider}
@@ -121,3 +129,12 @@ export default class Player extends Component {
     );
   }
 }
+function getStyle(state) {
+  let display;
+  state ? display = 'block' : 'none';
+  return {
+    wrapper: {
+      display: display
+    }
+  }
+};

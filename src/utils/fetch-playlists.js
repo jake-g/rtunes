@@ -3,7 +3,7 @@ import { mkdir, writeFile } from 'fs'
 import fetch from 'isomorphic-fetch'
 
 const FETCH_URL = 'https://www.reddit.com/api/multi/user/evilnight?expand_srs=1'
-const OUT_FILE = join(__dirname, '..', 'data', 'playlists.json')
+const OUT_FILE = join(__dirname, '..', '..', 'data', 'playlists.json')
 const IGNORE_MULTIS = ['redditunes', 'instruments', 'musicmakers', 'agoramusica', 'any']
 const DISCOVER_MULTIS = ['truemusic', 'thefirehose', 'thefountain', 'thedrip']
 

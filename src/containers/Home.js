@@ -6,7 +6,7 @@ import TopThreads from '../components/TopThreads';
 import Item from '../components/Item';
 import Icon from '../components/Icon';
 import Button from '../components/Button';
-import { pluralize } from '../utils';
+import { pluralize } from '../utils/utils';
 import { APP_NAME, APP_TAGLINE, SEPARATOR } from '../config';
 
 export default class Home extends Component {

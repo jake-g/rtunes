@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, IndexRoute, Redirect, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, Redirect, browserHistory, hashHistory } from 'react-router';
 
 // import { trackPageView } from './analytics'
 import App from './containers/App';
@@ -11,7 +11,7 @@ import Playlist from './components/Playlist';
 // browserHistory.listen(trackPageView)
 
 render((
-  <Router history={browserHistory}>
+  <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Home} />
       <Route path="r/:subreddit" component={Playlist}>

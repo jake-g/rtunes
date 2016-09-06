@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { fetchPosts } from 'fetch-reddit';
+import { fetchPosts } from '../utils/fetch-tracks';
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router';
 
@@ -109,7 +109,6 @@ export default class Playlist extends Component {
   toggleStations() {
     this.setState({ showStations: !this.state.showStations });
   }
-  // TODO make component for header
   renderSortLinks() {
     const { subreddit, multi, username, post_id } = this.props.params;
     if (subreddit && !post_id || multi) {
@@ -141,12 +140,20 @@ export default class Playlist extends Component {
 
         </ul>
       );
+    } else {   // for TopThreads
+      return (
+        <ul className={classNames.sort}>
+          <li> <Icon icon="logo" /></li>
+          <li> <button onClick={() => this.toggleStations()} ><Icon icon="menu" /></button> </li>
+          <li>{SEPARATOR}</li>
+          <li><Link to={'/'} >home</Link></li>
+        </ul>
+      )
     }
     return null;
   }
   render() {
     const { loadMore, activePost } = this.state;
-
     let style = getStyle();
 
     var header = (
@@ -154,8 +161,6 @@ export default class Playlist extends Component {
         {this.renderSortLinks()}
       </div>
     );
-
-    // TODO make headeer alternate stations, threads,
 
     const posts = this.getPosts();
     var playlist = (
@@ -178,7 +183,6 @@ export default class Playlist extends Component {
       );
     }
 
-    // TODO make buttton to pop out player
     var player = (
       <div className="player" style={style.footer}>
         <Player activePost={activePost} onSkip={this.skip} />
@@ -198,24 +202,23 @@ export default class Playlist extends Component {
   }
 }
 
-// TODO move header and footer (player) into App.js
-// TODO either use inline or scss...
 function getStyle() {
-  // TODO this looks sketchy...
   document.body.style.overflow = 'hidden';
 
-// TODO player needs to alway show noamtter what size
-// TODO hide stations if mobile
+// TODO hide artwork when small
+// TODO hide stations if mobile / small
   return {
     page: {
+      display: 'flex',
+      flexDirection: 'column',
       height: '100%'
     },
     contents: {
       flex: 'auto',
       display: 'flex',
       flexDirection: 'row',
-      height: '98%',
-      paddingBottom: '60px'
+      height: '100%',
+      padding: '2px'
     },
     playlist: {
       overflowY: 'scroll',
@@ -224,12 +227,12 @@ function getStyle() {
       // height: '90vh'
     },
     header: {
-      height: '35px'
+      flex: '0 0 32px',
+      width: '100%',
+      overflowX: 'hidden'
     },
     footer: {
-      position: 'fixed',
-      bottom: '3px',
-      width: '98%'
+      flex: 'auto',
     },
     stations: {
       flex: '1 2 140px',

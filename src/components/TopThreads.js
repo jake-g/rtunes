@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Item from '../components/Item';
 import Button from '../components/Button';
-import { fetchJSON, pluralize } from '../utils';
+import { fetchJSON, pluralize } from '../utils/utils';
 
 const SEARCH_URL = 'https://www.reddit.com/r/AskReddit/search.json';
 const SEARCH_QUERY = {

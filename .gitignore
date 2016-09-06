@@ -1,5 +1,9 @@
 .DS_Store
+*.zip
 node_modules
+*.log
 npm-debug.log
 # dist
 # data
+lib
+coverage

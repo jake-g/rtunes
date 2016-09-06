@@ -3,7 +3,7 @@ import TimeAgo from 'react-timeago';
 import { Link } from 'react-router';
 
 import Item from './Item';
-import { pluralize, isNumber, decode } from '../utils';
+import { pluralize, isNumber, decode } from '../utils/utils';
 import { SEPARATOR } from '../config';
 
 export default class Post extends Component {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { isNumber } from '../utils';
+import { isNumber } from '../utils/utils';
 
 import classNames from '../styles/components/Range.scss';
 
