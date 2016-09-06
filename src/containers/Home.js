@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 
 import classNames from '../styles/containers/Home.scss';
+import header from '../styles/components/Playlist.scss';
 import playlists from '../../data/playlists.json';
 import TopThreads from '../components/TopThreads';
 import Item from '../components/Item';
 import Icon from '../components/Icon';
 import Button from '../components/Button';
+import About from './About'
 import { pluralize } from '../utils/utils';
 import { APP_NAME, APP_TAGLINE, SEPARATOR } from '../config';
 
@@ -14,7 +16,8 @@ export default class Home extends Component {
   state = {
     limitSubs: 15,
     limitGenres: 10,
-    searchTerm: ''
+    searchTerm: '',
+    showStations: false
   };
 
   componentDidMount() {
@@ -77,14 +80,35 @@ export default class Home extends Component {
       </section>
     );
   }
-
+  
+  toggleAbout() {
+    this.setState({ showAbout: !this.state.showAbout });
+  }
   render() {
     const { limitSubs, limitGenres, searchTerm } = this.state;
     const subreddits = playlists.subreddits.filter(this.filterSubreddit);
     // TODO this looks sketchy...
     document.body.style.overflow = 'auto';
+    
+    let about;
+    if (this.state.showAbout) {
+      about = (
+          <About onClose={this.toggleAbout}/>
+      );
+    }
     return (
       <section className={classNames.home}>
+        <div className="header" style={style.header}>
+          <ul className={header.sort}>
+            <li> <Icon icon="logo" /></li>
+            <li> rtunes </li>
+            <li>{SEPARATOR}</li>
+            <li className={header.activeSortLink}>
+               <button onClick={() => this.toggleAbout()} >about</button> 
+            </li>
+          </ul>
+          {about}
+        </div>
         <h2>
           <Icon icon="playlist" />
           Playlists
@@ -133,3 +157,10 @@ export default class Home extends Component {
     );
   }
 }
+const style = {
+  header: {
+    flex: '0 0 32px',
+    width: '100%',
+    overflowX: 'hidden'
+  },
+};
