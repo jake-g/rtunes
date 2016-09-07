@@ -51,12 +51,12 @@ export default class Home extends Component {
   }
 
   renderSubreddit({ name, subscribers }) {
+    // meta={pluralize(subscribers, 'subscriber')}
     return (
       <Item
         key={name}
         href={'/r/' + name}
         title={name}
-        meta={pluralize(subscribers, 'subscriber')}
         thumbnail={null}
       />
     );
@@ -80,31 +80,35 @@ export default class Home extends Component {
       </section>
     );
   }
-  
+
   toggleAbout() {
     this.setState({ showAbout: !this.state.showAbout });
   }
   render() {
     const { limitSubs, limitGenres, searchTerm } = this.state;
     const subreddits = playlists.subreddits.filter(this.filterSubreddit);
-    // TODO this looks sketchy...
     document.body.style.overflow = 'auto';
-    
+
     let about;
     if (this.state.showAbout) {
       about = (
-          <About onClose={this.toggleAbout}/>
+        <div>
+          <About />
+          <button onClick={() => this.toggleAbout()} >
+            <Icon icon='expand-less'/><a>close</a>
+          </button>
+        </div>
       );
     }
     return (
       <section className={classNames.home}>
-        <div className="header" style={style.header}>
+        <div>
           <ul className={header.sort}>
             <li> <Icon icon="logo" /></li>
             <li> rtunes </li>
             <li>{SEPARATOR}</li>
-            <li className={header.activeSortLink}>
-               <button onClick={() => this.toggleAbout()} >about</button> 
+            <li>
+               <button onClick={() => this.toggleAbout()} ><a>about</a></button>
             </li>
           </ul>
           {about}
@@ -157,10 +161,3 @@ export default class Home extends Component {
     );
   }
 }
-const style = {
-  header: {
-    flex: '0 0 32px',
-    width: '100%',
-    overflowX: 'hidden'
-  },
-};

@@ -10,10 +10,7 @@ const CURATION_URL = 'https://www.reddit.com/r/listentothis/comments/1iwc8n/meta
 const LISTENTOTHIS_URL = 'https://www.reddit.com/r/listentothis'
 
 export default function About() {
-  
-  About.propTypes = {
-    onClose: PropTypes.func,
-  }
+
   return (
     <section>
       <h2>
@@ -38,7 +35,6 @@ export default function About() {
           Yes, there are other apps that do the job. I wanted to create something simple with a clean, minimal interface. Also, this app fixes <a href='https://github.com/CookPete/react-player/issues/7' target='_blank'>issues</a> that other apps still suffer from.
         </dd>
       </dl>
-      <Icon icon='expand-less'/>
     </section>
   )
 }

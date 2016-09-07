@@ -2,7 +2,7 @@
 @import '../mixins';
 
 .home {
-  padding: 0px 40px;
+  padding: 0px 20px;
 }
 
 .columns {
@@ -38,6 +38,7 @@
       }
     }
   }
+
 }
 
 .search {
@@ -57,4 +58,10 @@
 
 .clearSearch {
   padding: 0;
+}
+
+.header {
+    flex: 0 0 32px;
+    width: 100%;
+    overflow-x: hidden;
 }
