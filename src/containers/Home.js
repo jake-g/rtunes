@@ -14,8 +14,8 @@ import { APP_NAME, APP_TAGLINE, SEPARATOR } from '../config';
 export default class Home extends Component {
 
   state = {
-    limitSubs: 15,
-    limitGenres: 10,
+    limitSubs: 27,
+    limitGenres: 12,
     searchTerm: '',
     showStations: false
   };

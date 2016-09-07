@@ -70,14 +70,13 @@ export default class Post extends Component {
   }
   renderMeta(post) {
     let nodes = [
+      this.renderSource(post), SEPARATOR,
       this.renderTime(post), SEPARATOR,
       this.renderComments(post)
     ];
     if (this.props.showSubreddit) {
       nodes = nodes.concat(SEPARATOR, this.renderSubreddit(post));
     }
-    nodes = nodes.concat(SEPARATOR, this.renderSource(post))
-
     return nodes;
   }
 

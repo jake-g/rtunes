@@ -10,6 +10,7 @@ import Button from './Button';
 import Post from './Post';
 import Stations from './Stations';
 import { APP_NAME, IGNORE_AUTHORS, DEFAULT_POST_TITLE, SEPARATOR } from '../config';
+const MIN_STATION_WIDTH = 500;
 
 export default class Playlist extends Component {
   static propTypes = {
@@ -20,7 +21,8 @@ export default class Playlist extends Component {
     posts: {},
     loadMore: null,
     activePost: null,
-    showStations: true
+    showStations: true,
+    windowWidth: window.innerWidth
   };
   componentDidMount() {
     const { pathname, query } = this.props.location;
@@ -155,7 +157,6 @@ export default class Playlist extends Component {
   render() {
     const { loadMore, activePost } = this.state;
     let style = getStyle();
-
     var header = (
       <div className="header" style={style.header}>
         {this.renderSortLinks()}
@@ -175,7 +176,7 @@ export default class Playlist extends Component {
     );
 
     let stations;
-    if (this.state.showStations) {
+    if (this.state.showStations && this.state.windowWidth > MIN_STATION_WIDTH) {
       stations = (
         <div className="station-container" style={style.stations}>
           <Stations />
