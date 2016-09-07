@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { fetchPosts } from '../utils/fetch-tracks';
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router';
+import { dimensions } from '../utils/utils';
 
 import classNames from '../styles/components/Playlist.scss';
 import Player from './Player';
@@ -10,7 +11,6 @@ import Button from './Button';
 import Post from './Post';
 import Stations from './Stations';
 import { APP_NAME, IGNORE_AUTHORS, DEFAULT_POST_TITLE, SEPARATOR } from '../config';
-const MIN_STATION_WIDTH = 500;
 
 export default class Playlist extends Component {
   static propTypes = {
@@ -21,10 +21,13 @@ export default class Playlist extends Component {
     posts: {},
     loadMore: null,
     activePost: null,
-    showStations: true,
-    windowWidth: window.innerWidth
+    showStations: true
   };
   componentDidMount() {
+    let dim = dimensions();
+    if (dim.width < 500) {
+      this.setState({showStations: false});
+    }
     const { pathname, query } = this.props.location;
     fetchPosts(pathname, query).then(::this.processPosts);
   }
@@ -155,8 +158,9 @@ export default class Playlist extends Component {
     return null;
   }
   render() {
-    const { loadMore, activePost } = this.state;
+    const { loadMore, activePost, width } = this.state;
     let style = getStyle();
+
     var header = (
       <div className="header" style={style.header}>
         {this.renderSortLinks()}
@@ -176,7 +180,7 @@ export default class Playlist extends Component {
     );
 
     let stations;
-    if (this.state.showStations && this.state.windowWidth > MIN_STATION_WIDTH) {
+    if (this.state.showStations) {
       stations = (
         <div className="station-container" style={style.stations}>
           <Stations />
