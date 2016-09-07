@@ -1,6 +1,6 @@
 {
   "name": "rtunes",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "engines": {
     "node": "6.2.1"
   },
@@ -15,7 +15,7 @@
     "prebuild": "npm run clean && npm run fetch-playlists",
     "build": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "postbuild": "cp index.html dist && cp images/favicon.ico dist",
-    "deploy": "npm run build && git commit dist/ -m 'new build' && git push heroku -u master"
+    "deploy": "npm run build && git commit dist/ data/ -m 'new build' && git push heroku -u master"
   },
   "author": "Jake",
   "license": "MIT",
