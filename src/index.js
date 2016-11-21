@@ -2,13 +2,13 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, Redirect, browserHistory, hashHistory } from 'react-router';
 
-// import { trackPageView } from './analytics'
+import { trackPageView } from './analytics'
 import App from './containers/App';
 import Home from './containers/Home';
 import Playlist from './components/Playlist';
 
 // Hook up analytics
-// browserHistory.listen(trackPageView)
+browserHistory.listen(trackPageView)
 
 render((
   <Router history={hashHistory}>
