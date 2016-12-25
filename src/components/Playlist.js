@@ -124,7 +124,6 @@ export default class Playlist extends Component {
       />
     );
   };
-
   toggleStations() {
     this.setState({ showStations: !this.state.showStations });
   }
@@ -135,10 +134,10 @@ export default class Playlist extends Component {
       const path = subreddit ? `/r/${subreddit}` : `/user/${username}/m/${multi}`;
       return (
         <ul className={classNames.sort}>
-          <li> <Icon icon="logo" /></li>
-          <li> <button onClick={() => this.toggleStations()} ><Icon icon="menu" /></button> </li>
-          <li>{SEPARATOR}</li>
-          <li><Link to={'/'} >home</Link></li>
+          <li><Link to={'/'} ><Icon icon="home" /></Link></li>
+          {/*<li> <Icon icon="logo" /></li>*/}
+          <li><button onClick={() => this.toggleStations()} ><Icon icon="menu" /></button></li>
+          {/*<li><button onClick={() => this.toggleDark()} ><Icon icon="brightness-1" /></button></li>*/}
           <li>{SEPARATOR}</li>
           <li><Link to={path + '/hot'} activeClassName={classNames.activeSortLink}>hot</Link></li>
           <li><Link to={path + '/new'} activeClassName={classNames.activeSortLink}>new</Link></li>
@@ -153,8 +152,9 @@ export default class Playlist extends Component {
               </li>
             );
           })}
+
           {/* <li><a href={this.state.activePost.url} target='_blank'>now playing</a></li>*/}
-          {/* <li>{SEPARATOR}</li>*/}
+          {/*<li>{SEPARATOR}</li>*/}
           {/* <li><a href={'https://www.reddit.com' + pathname + search} target='_blank'>reddit source</a></li>*/}
 
         </ul>

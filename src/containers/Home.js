@@ -10,6 +10,7 @@ import Button from '../components/Button';
 import About from './About'
 import { pluralize } from '../utils/utils';
 import { APP_NAME, APP_TAGLINE, SEPARATOR } from '../config';
+import GitHubButton from 'react-github-button';
 
 export default class Home extends Component {
 
@@ -88,7 +89,11 @@ export default class Home extends Component {
     const { limitSubs, limitGenres, searchTerm } = this.state;
     const subreddits = playlists.subreddits.filter(this.filterSubreddit);
     document.body.style.overflow = 'auto';
+    let github = (
+      // <!-- Place this tag where you want the button to render. -->
+      <a class="github-button" href="https://github.com/jake-g/rtunes" data-icon="octicon-star" data-style="mega" aria-label="Star jake-g/rtunes on GitHub">Star</a>
 
+      )
     let about;
     if (this.state.showAbout) {
       about = (
@@ -105,10 +110,12 @@ export default class Home extends Component {
         <div>
           <ul className={header.sort}>
             <li> <Icon icon="logo" /></li>
-            <li> rtunes </li>
-            <li>{SEPARATOR}</li>
-            <li>
-               <button onClick={() => this.toggleAbout()} ><a>about</a></button>
+            <li style={{fontSize: '20px'}}> rtunes </li>
+            <li style={{float: 'right'}}>
+              <a href="https://github.com/jake-g/rtunes" target='_blank'><Icon icon="github" /></a>
+              {SEPARATOR}
+              <button onClick={() => this.toggleAbout()} ><a><Icon icon='about' />
+              </a></button>
             </li>
           </ul>
           {about}

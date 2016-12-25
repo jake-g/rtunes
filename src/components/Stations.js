@@ -114,7 +114,7 @@ const style = {
     display: 'flex',
     alignItems: 'center',
     maxWidth: '85%',
-    height: '25px',
+    height: '28px',
     margin: 'auto',
     marginLeft: '0px',
     marginBottom: '.5rem',

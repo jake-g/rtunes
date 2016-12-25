@@ -16,7 +16,6 @@ export default function About() {
   return (
     <section>
       <h2>
-        <Icon icon='info-outline' />
         About
       </h2>
       <dl style={{marginLeft: '20px'}}>
