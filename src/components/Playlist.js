@@ -36,10 +36,10 @@ export default class Playlist extends Component {
     }
   };
   hideStations = ()  => {
+    // auto open or close stations based off size
     const close_width = 450 // TODO define elsewhere?
     const open_width = 700
     let dim = dimensions();
-    console.log(dim);
     if (dim.width < close_width) {
       this.setState({
         showStations: false
@@ -205,9 +205,9 @@ export default class Playlist extends Component {
     let info;
     if (activePost) {
       info = (
-        <ul className={classNames.title} >
-          <li><a href={activePost.url} target='_blank'>{activePost.title}</a></li>
-        </ul>
+          <ul className={classNames.title} >
+            <li><a href={activePost.url} target='_blank'>{activePost.title}</a></li>
+          </ul>
       );
     }
 
@@ -258,10 +258,12 @@ function getStyle() {
     header: {
       flex: '0 0 32px',
       width: '100%',
-      overflowX: 'hidden'
+      overflowX: 'scroll',
+      whiteSpace: 'nowrap'
     },
     footer: {
       flex: 'auto',
+      whiteSpace: 'nowrap'
     },
     stations: {
       flex: '1 2 140px',

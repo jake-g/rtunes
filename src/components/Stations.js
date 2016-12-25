@@ -59,13 +59,13 @@ export default class Station extends Component {
   renderSearch(searchTerm) {
     return (
       <section style={style.search}>
-        <div style={style.searchIcon}><Icon icon="search" /></div>
         <input
           type="text"
           value={searchTerm}
           onChange={this.onChangeSearch}
-          placeholder="search"
+          placeholder="filter"
         />
+        {!searchTerm && <div style={style.searchIcon}><Icon icon="search" /></div>}
         {searchTerm &&
           <button style={style.clearSearch} onClick={() => this.setState({ searchTerm: '' })} >
             <Icon icon="clear" />
@@ -113,9 +113,10 @@ const style = {
   search: {
     display: 'flex',
     alignItems: 'center',
-    maxWidth: '90%',
-    height: '30px',
+    maxWidth: '85%',
+    height: '25px',
     margin: 'auto',
+    marginLeft: '0px',
     marginBottom: '.5rem',
     padding: '4px',
     // background: 'lighten(#000, 97%)',
