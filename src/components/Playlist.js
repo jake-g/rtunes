@@ -24,19 +24,33 @@ export default class Playlist extends Component {
     showStations: true
   };
   componentDidMount() {
-    let dim = dimensions();
-    if (dim.width < 500) {
-      this.setState({showStations: false});
-    }
+    this.hideStations()
+    window.addEventListener("resize", this.hideStations);
     const { pathname, query } = this.props.location;
     fetchPosts(pathname, query).then(::this.processPosts);
-  }
+  };
   componentWillReceiveProps(nextProps) {
     if (!this.getPosts(nextProps)) {
       const { pathname, query } = nextProps.location;
       fetchPosts(pathname, query).then(::this.processPosts);
     }
-  }
+  };
+  hideStations = ()  => {
+    const close_width = 450 // TODO define elsewhere?
+    const open_width = 700
+    let dim = dimensions();
+    console.log(dim);
+    if (dim.width < close_width) {
+      this.setState({
+        showStations: false
+      });
+    }
+    if (dim.width > open_width) {
+      this.setState({
+        showStations: true
+      });
+    }
+  };
   processPosts({ posts, loadMore }) {
     const { pathname, search } = this.props.location;
     const currentPosts = this.getPosts();

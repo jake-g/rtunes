@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react';
+import { dimensions } from '../utils/utils';
 import ReactPlayer from 'react-player';
 
 import classNames from '../styles/components/Player.scss';
 import Range from './Range';
 import Icon from './Icon';
 import Duration from './Duration';
+
 
 export default class Player extends Component {
   static propTypes = {
@@ -17,17 +19,36 @@ export default class Player extends Component {
     volume: 0.8,
     played: 0,
     loaded: 0,
-    duration: 0
+    duration: 0,
+    showVidToggle: false
   };
+  componentDidMount() {
+    this.hideVideo()
+    window.addEventListener("resize", this.hideVideo);
+  }
   componentWillReceiveProps(nextProps) {
     if (this.props.activePost !== nextProps.activePost) {
       this.setState({
         playing: true,
         played: 0,
-        loaded: 0
+        loaded: 0,
       });
     }
   }
+  hideVideo = ()  => {
+    // hide video if window too small
+    const max_ratio = 1.3 // TODO define elsewhere?
+    let dim = dimensions();
+    let ratio = dim.app_width/dim.app_height
+    if (ratio > max_ratio) {
+      this.setState({
+        video: false,
+        showVidToggle: false
+      });
+    } else {
+      this.setState({ showVidToggle: true });
+    }
+  };
   onPlayerPlay = () => {
     this.setState({ playing: true });
   };
@@ -75,6 +96,15 @@ export default class Player extends Component {
     const { activePost } = this.props;
     const { playing, volume, duration, played, loaded } = this.state;
     const style = getStyle(this.state.video)
+    let vidIcon
+    if (this.state.showVidToggle) {
+      vidIcon = (
+        <button onClick={this.onToggleVideo}>
+          <Icon icon="video" />
+        </button>
+      )
+    }
+
     return (
       <div>
         <section className={classNames.playerWrapper} style={style.wrapper}>
@@ -105,9 +135,7 @@ export default class Player extends Component {
           <button onClick={this.onClickNext}>
             <Icon icon="next" />
           </button>
-          <button onClick={this.onToggleVideo}>
-            <Icon icon="video" />
-          </button>
+          {vidIcon}
           <Duration className={classNames.duration} seconds={duration * played} />
           <Range
             className={classNames.timeSlider}

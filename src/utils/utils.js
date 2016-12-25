@@ -50,6 +50,8 @@ export function dimensions() {  // window dimensions
     const body = document.getElementsByTagName('body')[0];
     return ({
       width: window.innerWidth || documentElement.clientWidth || body.clientWidth,
-      height: window.innerHeight|| documentElement.clientHeight|| body.clientHeight
+      height: window.innerHeight|| documentElement.clientHeight|| body.clientHeight,
+      app_width: document.getElementById('app').offsetWidth,
+      app_height: document.getElementById('app').offsetHeight
     });
 }
