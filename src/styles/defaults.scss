@@ -12,8 +12,10 @@
   }
 
   body {
+    margin: auto;
     min-height: $min-win-height;
     min-width: $min-win-width;
+    max-width: $max-win-width;
   }
 
   h1,
