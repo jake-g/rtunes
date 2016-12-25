@@ -259,6 +259,7 @@ function getStyle() {
       flex: '0 0 32px',
       width: '100%',
       overflowX: 'scroll',
+      overflowY: 'hidden',
       whiteSpace: 'nowrap'
     },
     footer: {

@@ -18,6 +18,11 @@
     max-width: $max-win-width;
   }
 
+  // hide extra scrollbars
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   h1,
   h2 {
     margin-bottom: $spacing;
