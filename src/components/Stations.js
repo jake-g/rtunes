@@ -11,7 +11,7 @@ import { APP_NAME, APP_TAGLINE, SEPARATOR } from '../config';
 export default class Station extends Component {
 
   state = {
-    limitSubs: 200,
+    limitSubs: 30,
     searchTerm: '',
   };
 
