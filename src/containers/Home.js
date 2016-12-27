@@ -46,7 +46,7 @@ export default class Home extends Component {
         href={path}
         title={name}
         meta={description}
-        thumbnail={null}
+        thumbnail={'small'}
         hoverText={name + ': ' +  subscribers+ ' subscribers'}
       />
     );
@@ -59,7 +59,7 @@ export default class Home extends Component {
         key={name}
         href={'/r/' + name}
         title={name}
-        thumbnail={null}
+        thumbnail={'small'}
         hoverText={name + ': ' +  subscribers+ ' subscribers'}
       />
     );

@@ -41,6 +41,9 @@ function renderContent({ thumbnail, title, meta, hoverText }) {
   let thumb = (
     <div key="thumb" className={classNames.thumbnail} style={thumbStyle} />
   );
+  if (thumbnail === 'small') { // small colored circle
+    thumb = <div key="thumb" className={classNames.smallThumbnail} style={thumbStyle} />
+  }
   if (thumbnail === null) {
     thumb = null;
   }
