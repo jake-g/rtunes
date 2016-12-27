@@ -5,10 +5,13 @@ import randomcolor from 'randomcolor';
 import classNames from '../styles/components/Item.scss';
 import { DEFAULT_POST_TITLE } from '../config';
 
-export default function Item({ onClick, href, thumbnail, title, meta, active, hoverText }) {
+export default function Item({ onClick, href, thumbnail, title, meta, active, hoverText, activeClass }) {
   const itemClass = active ? classNames.activeItem : classNames.item;
   let content = renderContent({ thumbnail, title, meta, hoverText });
-  if (href) {
+  if (activeClass && href) {
+    content = <Link to={href} activeClassName={activeClass}>{content}</Link>;
+  }
+  else if (href) {
     content = <Link to={href}>{content}</Link>;
   }
   return (

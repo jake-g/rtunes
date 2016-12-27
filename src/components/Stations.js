@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import playlists from '../../data/playlists.json';
+import classNames from '../styles/components/Stations.scss';
 import TopThreads from './TopThreads';
 import Item from './Item';
 import Icon from './Icon';
@@ -47,18 +48,17 @@ export default class Station extends Component {
         key={name}
         href={'/r/' + name}
         title={name}
-        hoverText={name + ': ' +  subscribers+ ' subscribers'}
+        hoverText={name + ': ' + subscribers + ' subscribers'}
+        activeClass = {classNames.active}
         thumbnail={null}
       />
     );
   }
 
-// TODO add activeLinks with line under to toggle showing  what station mode (subred, thread, genre, custom)
-// TODO make a saerch component
 // TODO Paginate rather than show more
   renderSearch(searchTerm) {
     return (
-      <section style={style.search}>
+      <section className={classNames.search}>
         <input
           type="text"
           value={searchTerm}
@@ -66,9 +66,9 @@ export default class Station extends Component {
           placeholder="filter"
         />
         {!searchTerm &&
-          <div style={style.searchIcon}><Icon icon="search" /></div>}
+          <div className={classNames.searchIcon}><Icon icon="search" /></div>}
         {searchTerm &&
-          <button style={style.clearSearch} onClick={() => this.setState({ searchTerm: '' })} >
+          <button className={classNames.clearSearch} onClick={() => this.setState({ searchTerm: '' })} >
             <Icon icon="clear" />
           </button>
         }
@@ -79,16 +79,10 @@ export default class Station extends Component {
   render() {
     const { limitSubs, searchTerm } = this.state;
     const subreddits = playlists.subreddits.filter(this.filterSubreddit);
-    // var currentPlaylist = (
-    //   <div style={style.title}>
-    //     this.renderSubreddit({name: 'curr'})
-    //   </div>
-    // )
-    //TODO put currentPlaylist above stition list and have it represent selected thread
     return (
       <section className="station-container">
         {this.renderSearch(searchTerm)}
-        <ul style={style.list}>
+        <ul className={classNames.list}>
           {subreddits.slice(0, limitSubs).map(this.renderSubreddit)}
           {subreddits.length === 0 &&
             <li>no stations found</li>
@@ -104,35 +98,3 @@ export default class Station extends Component {
     );
   }
 }
-
-const style = {
-  list: {
-    fontWeight: '500',
-    lineHeight: '1.2',
-    paddingLeft: '5px'
-  },
-  search: {
-    display: 'flex',
-    alignItems: 'center',
-    maxWidth: '85%',
-    height: '28px',
-    margin: 'auto',
-    marginLeft: '0px',
-    marginBottom: '.5rem',
-    padding: '4px',
-    // background: 'lighten(#000, 97%)',
-    background: 'hsl(0, 0%, 97%)',
-    borderRadius: '2em',
-  },
-  searchIcon: {
-    fill: 'hsl(0, 0%, 75%)',
-    flexShrink: '0',
-  },
-  clearSearch: {
-    padding: '0',
-    fill: 'hsl(0, 0%, 75%)',
-  },
-  title: {
-    color: '#000'
-  }
-};

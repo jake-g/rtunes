@@ -1,0 +1,36 @@
+@import '../variables';
+
+.search {
+  display: flex;
+  align-items: center;
+  max-width: 85%;
+  height: 28px;
+  margin: auto;
+  margin-left: 0px;
+  margin-bottom: .5rem;
+  padding: 4px;
+  background: hsl(0, 0%, 97%);
+  border-radius: 2em;
+}
+
+.searchIcon {
+  fill: hsl(0, 0%, 75%);
+  flex-shrink: 0;
+}
+
+.clearSearch {
+  padding: 0;
+  fill: hsl(0, 0%, 75%);
+}
+
+.title {
+  color: #000;
+}
+
+.active {
+  font-weight: 500;
+  // border-bottom: 2px $link-color solid;
+  // &:hover {
+  //   border-bottom-color: lighten($link-color, 20%);
+  // }
+}
