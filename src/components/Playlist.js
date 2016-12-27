@@ -39,7 +39,6 @@ export default class Playlist extends Component {
   };
 
   hideStations = ()  => {
-    // auto open or close stations based off size
     // TODO handle this with css mixin?
     let dim = dimensions();
     if (dim.width < STATION_CLOSE) {
@@ -154,11 +153,6 @@ export default class Playlist extends Component {
               </li>
             );
           })}
-
-          {/* <li><a href={this.state.activePost.url} target='_blank'>now playing</a></li>*/}
-          {/*<li>{SEPARATOR}</li>*/}
-          {/* <li><a href={'https://www.reddit.com' + pathname + search} target='_blank'>reddit source</a></li>*/}
-
         </ul>
       );
     } else {   // for TopThreads
@@ -189,7 +183,7 @@ export default class Playlist extends Component {
           {this.renderPosts(posts)}
           {posts &&
             <Button disabled={!loadMore} onClick={loadMore}>
-              Load more
+              Show more
             </Button>
           }
       </div>

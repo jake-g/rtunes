@@ -85,7 +85,7 @@ export default class Post extends Component {
     return (
       <Item
         onClick={this.onPlay}
-        thumbnail={post.thumbnail}
+        thumbnail={post.thumbnail || 'color'}
         title={decode(post.title)}
         meta={this.renderMeta(post)}
         active={playing}

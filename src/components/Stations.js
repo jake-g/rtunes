@@ -89,7 +89,7 @@ export default class Station extends Component {
           }
         </ul>
         {subreddits.length > limitSubs &&
-        <Button onClick={() => this.setState({ limitSubs: limitSubs + 100 })}>
+        <Button onClick={() => this.setState({ limitSubs: limitSubs*2 })}>
           Show more
         </Button>
         }
