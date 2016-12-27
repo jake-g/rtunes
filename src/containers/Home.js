@@ -10,7 +10,6 @@ import Button from '../components/Button';
 import About from './About'
 import { pluralize } from '../utils/utils';
 import { APP_NAME, APP_TAGLINE, SEPARATOR } from '../config';
-import GitHubButton from 'react-github-button';
 
 export default class Home extends Component {
 
