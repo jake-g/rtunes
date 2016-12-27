@@ -29,25 +29,25 @@ export default class Station extends Component {
     return true;
   };
 
-// TODO mouseover show description
-  renderMulti({ path, name, description }) {
-    return (
-      <Item
-        key={path}
-        href={path}
-        title={name}
-        thumbnail={null}
-      />
-    );
-  }
+// TODO add in multi stations
+//   renderMulti({ path, name, description }) {
+//     return (
+//       <Item
+//         key={path}
+//         href={path}
+//         title={name}
+//         thumbnail={null}
+//       />
+//     );
+//   }
 
-  // TODO mouseover show subscribers (or description)
   renderSubreddit({ name, subscribers }) {
     return (
       <Item
         key={name}
         href={'/r/' + name}
         title={name}
+        hoverText={name + ': ' +  subscribers+ ' subscribers'}
         thumbnail={null}
       />
     );
@@ -65,7 +65,8 @@ export default class Station extends Component {
           onChange={this.onChangeSearch}
           placeholder="filter"
         />
-        {!searchTerm && <div style={style.searchIcon}><Icon icon="search" /></div>}
+        {!searchTerm &&
+          <div style={style.searchIcon}><Icon icon="search" /></div>}
         {searchTerm &&
           <button style={style.clearSearch} onClick={() => this.setState({ searchTerm: '' })} >
             <Icon icon="clear" />
@@ -80,7 +81,7 @@ export default class Station extends Component {
     const subreddits = playlists.subreddits.filter(this.filterSubreddit);
     // var currentPlaylist = (
     //   <div style={style.title}>
-    //     this.renderSubreddit({name: 'FUCK ME'})
+    //     this.renderSubreddit({name: 'curr'})
     //   </div>
     // )
     //TODO put currentPlaylist above stition list and have it represent selected thread
@@ -129,6 +130,7 @@ const style = {
   },
   clearSearch: {
     padding: '0',
+    fill: 'hsl(0, 0%, 75%)',
   },
   title: {
     color: '#000'

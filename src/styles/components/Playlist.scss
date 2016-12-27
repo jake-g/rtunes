@@ -16,6 +16,7 @@
 }
 
 .title {
+  composes: truncate from '../_utils.scss';
   text-align: center;
   font-weight: 500;
   font-size: 12.5px;

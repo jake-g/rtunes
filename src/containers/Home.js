@@ -39,7 +39,7 @@ export default class Home extends Component {
     return true;
   };
 
-  renderMulti({ path, name, description }) {
+  renderMulti({ path, name, description, subscribers }) {
     return (
       <Item
         key={path}
@@ -47,6 +47,7 @@ export default class Home extends Component {
         title={name}
         meta={description}
         thumbnail={null}
+        hoverText={name + ': ' +  subscribers+ ' subscribers'}
       />
     );
   }
@@ -59,6 +60,7 @@ export default class Home extends Component {
         href={'/r/' + name}
         title={name}
         thumbnail={null}
+        hoverText={name + ': ' +  subscribers+ ' subscribers'}
       />
     );
   }
@@ -89,11 +91,6 @@ export default class Home extends Component {
     const { limitSubs, limitGenres, searchTerm } = this.state;
     const subreddits = playlists.subreddits.filter(this.filterSubreddit);
     document.body.style.overflow = 'auto';
-    let github = (
-      // <!-- Place this tag where you want the button to render. -->
-      <a class="github-button" href="https://github.com/jake-g/rtunes" data-icon="octicon-star" data-style="mega" aria-label="Star jake-g/rtunes on GitHub">Star</a>
-
-      )
     let about;
     if (this.state.showAbout) {
       about = (
