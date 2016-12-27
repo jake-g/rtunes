@@ -6,8 +6,8 @@
   }
 }
 
-@mixin tablet {
-  @media (min-width: $break-tablet) {
+@mixin mobile {
+  @media (min-width: $break-mobile) {
     @content;
   }
 }

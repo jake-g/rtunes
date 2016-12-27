@@ -11,6 +11,8 @@ import Button from './Button';
 import Post from './Post';
 import Stations from './Stations';
 import { APP_NAME, IGNORE_AUTHORS, DEFAULT_POST_TITLE, SEPARATOR } from '../config';
+const STATION_CLOSE = 450
+const STATION_OPEN = 700
 
 export default class Playlist extends Component {
   static propTypes = {
@@ -35,17 +37,17 @@ export default class Playlist extends Component {
       fetchPosts(pathname, query).then(::this.processPosts);
     }
   };
+
   hideStations = ()  => {
     // auto open or close stations based off size
-    const close_width = 450 // TODO define elsewhere?
-    const open_width = 700
+    // TODO handle this with css mixin?
     let dim = dimensions();
-    if (dim.width < close_width) {
+    if (dim.width < STATION_CLOSE) {
       this.setState({
         showStations: false
       });
     }
-    if (dim.width > open_width) {
+    if (dim.width > STATION_OPEN) {
       this.setState({
         showStations: true
       });
@@ -233,9 +235,6 @@ export default class Playlist extends Component {
 
 function getStyle() {
   document.body.style.overflow = 'hidden';
-
-// TODO hide artwork when small
-// TODO hide stations if mobile / small
   return {
     page: {
       display: 'flex',
@@ -264,7 +263,6 @@ function getStyle() {
     },
     footer: {
       flex: 'auto',
-      whiteSpace: 'nowrap'
     },
     stations: {
       flex: '1 2 140px',

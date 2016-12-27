@@ -6,7 +6,7 @@
 }
 
 .columns {
-  @include tablet {
+  @include mobile {
     display: flex;
     flex-wrap: wrap;
   }
@@ -15,7 +15,7 @@
 .genres {
   composes: columns;
 
-  @include tablet {
+  @include mobile {
     li {
       width: calc((100% - #{$spacing}) / 2);
 
@@ -29,7 +29,7 @@
 .subreddits {
   composes: columns;
 
-  @include tablet {
+  @include mobile {
     li {
       width: calc((100% - #{$spacing * 2}) / 3);
 

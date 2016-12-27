@@ -28,13 +28,13 @@ $title-font-size: 14px;
 
 .thumbnail {
   display: none;
-  @include tablet {
+  @include mobile {
     display: block;
     flex: 0 0 $height;
     height: $height;
     line-height: $height;
     margin-right: $spacing;
-    border-radius: 15%;
+    border-radius: 10%;
     background-color: $thumb-background;
     background-position: center;
     background-size: auto 135%; // Zoom a bit to crop out letterboxing
