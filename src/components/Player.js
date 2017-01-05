@@ -146,12 +146,14 @@ export default class Player extends Component {
             onSeekEnd={this.onSeekEnd}
           />
           <Duration className={classNames.duration} seconds={duration} />
-          <Icon icon="volume" className={classNames.volumeIcon} />
-          <Range
-            className={classNames.volumeSlider}
-            primary={volume}
-            onSeekChange={this.onSetVolume}
-          />
+            <div className={classNames.volumeIcon} >
+              <Icon icon="volume" />
+            </div>
+            <Range
+              className={classNames.volumeSlider}
+              primary={volume}
+              onSeekChange={this.onSetVolume}
+            />
         </section>
       </div>
     );
