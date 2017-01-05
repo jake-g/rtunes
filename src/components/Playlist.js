@@ -202,7 +202,7 @@ export default class Playlist extends Component {
     if (activePost) {
       info = (
           <ul className={classNames.title} >
-            <li><a href={activePost.url} target='_blank'>{activePost.title}</a></li>
+            <li><a className={'title'} href={activePost.url} target='_blank'>{activePost.title}</a></li>
           </ul>
       );
     }
