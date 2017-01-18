@@ -72,7 +72,7 @@ export default class Home extends Component {
           type="text"
           value={searchTerm}
           onChange={this.onChangeSearch}
-          placeholder="search"
+          placeholder="search playlists"
         />
         {searchTerm &&
           <button onClick={() => this.setState({ searchTerm: '' })} className={classNames.clearSearch}>
