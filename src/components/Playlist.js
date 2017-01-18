@@ -137,6 +137,15 @@ export default class Playlist extends Component {
 			const path = subreddit
 				? `/r/${subreddit}`
 				: `/user/${username}/m/${multi}`;
+      let hot, nue
+      if (!this.state.mobile) {
+        hot = (
+          <Link to={path + '/hot'} activeClassName={classNames.activeSortLink}>hot</Link>
+        )
+        nue = (
+          <Link to={path + '/new'} activeClassName={classNames.activeSortLink}>new</Link>
+        )
+      }
 			return (
 				<ul className={classNames.sort}>
 					<li>
@@ -147,14 +156,7 @@ export default class Playlist extends Component {
 						<button onClick={() => this.toggleStations()}><Icon icon="menu"/></button>
 					</li>
 					{/*<li><button onClick={() => this.toggleDark()} ><Icon icon="brightness-1" /></button></li>*/}
-					<li>{SEPARATOR}</li>
-					<li>
-						<Link to={path + '/hot'} activeClassName={classNames.activeSortLink}><Icon icon="hot"/></Link>
-					</li>
-					<li>
-						<Link to={path + '/new'} activeClassName={classNames.activeSortLink}><Icon icon="new"/></Link>
-					</li>
-					<li>{SEPARATOR}</li>
+          <li>{SEPARATOR}</li>
 					<li>top</li>
 					{['all', 'year', 'month', 'week', 'day'].map((sort) => {
 						return (
@@ -171,6 +173,13 @@ export default class Playlist extends Component {
 							</li>
 						);
 					})}
+          <li>{SEPARATOR}</li>
+          <li>
+            {hot}
+          </li>
+          <li>
+            {nue}
+          </li>
 				</ul>
 			);
 		} else { // for TopThreads
