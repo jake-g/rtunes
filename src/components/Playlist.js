@@ -87,7 +87,7 @@ export default class Playlist extends Component {
 	playPost = (post) => {
 		document.title = `${post.title || DEFAULT_POST_TITLE}${SEPARATOR}${APP_NAME}`;
 		this.setState({activePost: post});
-    
+
     const {loadMore} = this.state;
 		// Load more posts if this is the last in the current playlist
 		const posts = this.getPosts();
@@ -149,10 +149,10 @@ export default class Playlist extends Component {
 					{/*<li><button onClick={() => this.toggleDark()} ><Icon icon="brightness-1" /></button></li>*/}
 					<li>{SEPARATOR}</li>
 					<li>
-						<Link to={path + '/hot'} activeClassName={classNames.activeSortLink}>hot</Link>
+						<Link to={path + '/hot'} activeClassName={classNames.activeSortLink}><Icon icon="hot"/></Link>
 					</li>
 					<li>
-						<Link to={path + '/new'} activeClassName={classNames.activeSortLink}>new</Link>
+						<Link to={path + '/new'} activeClassName={classNames.activeSortLink}><Icon icon="new"/></Link>
 					</li>
 					<li>{SEPARATOR}</li>
 					<li>top</li>
