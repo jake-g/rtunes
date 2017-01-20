@@ -1,6 +1,6 @@
 {
   "name": "rtunes",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "A React app to play music from reddit. Based on Pete Cook <pete@cookpete.com> (http://github.com/cookpete)",
   "author": "Jake",
   "license": "MIT",
@@ -47,6 +47,7 @@
   "dependencies": {
     "babel-polyfill": "^6.5.0",
     "express": "^4.14.0",
+    "insert-css": "^2.0.0",
     "lscache": "^1.0.5",
     "normalize.css": "^3.0.3",
     "query-string": "^3.0.0",

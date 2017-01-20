@@ -2,8 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {fetchPosts} from '../utils/fetch-tracks';
 import ReactPlayer from 'react-player';
 import {Link} from 'react-router';
-import {dimensions, detect_mobile} from '../utils/utils';
-
+import {dimensions, detectMobile, toggleDarkMode} from '../utils/utils';
 import classNames from '../styles/components/Playlist.scss';
 import Player from './Player';
 import Icon from './Icon';
@@ -25,32 +24,42 @@ export default class Playlist extends Component {
 		loadMore: null,
 		activePost: null,
 		mobile: false,
-		showStations: true
+		darkMode: false,
+		showStations: null
 	};
 	componentDidMount() {
-		this.hideStations()
-		this.setState({mobile: detect_mobile()});
+		this.setState({mobile: detectMobile()});
 		window.addEventListener("resize", this.hideStations);
 		const {pathname, query} = this.props.location;
 		fetchPosts(pathname, query).then(:: this.processPosts);
 	};
 	componentWillReceiveProps(nextProps) {
+		this.hideStations()
 		if (!this.getPosts(nextProps)) {
 			const {pathname, query} = nextProps.location;
 			fetchPosts(pathname, query).then(:: this.processPosts);
 		}
 	};
 
+	toggleDark() {
+    this.setState({ darkMode: !this.state.darkMode });
+		toggleDarkMode(this.state.darkMode)
+	}
 	hideStations = () => {
 		// TODO handle this with css mixin?
 		let dim = dimensions();
-		if (dim.width < STATION_CLOSE) {
+		if (!this.state.showStations && dim.width < STATION_CLOSE) {
 			this.setState({showStations: false});
 		}
 		if (dim.width > STATION_OPEN) {
 			this.setState({showStations: true});
 		}
 	};
+	toggleStations() {
+		this.setState({
+			showStations: !this.state.showStations
+		});
+	}
 	processPosts({posts, loadMore}) {
 		const {pathname, search} = this.props.location;
 		const currentPosts = this.getPosts();
@@ -83,7 +92,6 @@ export default class Playlist extends Component {
 		const {posts} = this.state;
 		return posts[pathname + search];
 	}
-
 	playPost = (post) => {
 		document.title = `${post.title || DEFAULT_POST_TITLE}${SEPARATOR}${APP_NAME}`;
 		this.setState({activePost: post});
@@ -125,11 +133,6 @@ export default class Playlist extends Component {
 			? activePost.id === post.id
 			: false} showSubreddit/>);
 	};
-	toggleStations() {
-		this.setState({
-			showStations: !this.state.showStations
-		});
-	}
 	renderSortLinks() {
 		const {subreddit, multi, username, post_id} = this.props.params;
 		if (subreddit && !post_id || multi) {
@@ -144,16 +147,12 @@ export default class Playlist extends Component {
 					</li>
 					{/*<li> <Icon icon="logo" /></li>*/}
 					<li>
-						<button onClick={() => this.toggleStations()}><Icon icon="menu"/></button>
-					</li>
-					{/*<li><button onClick={() => this.toggleDark()} ><Icon icon="brightness-1" /></button></li>*/}
-					<li>{SEPARATOR}</li>
-					<li>
-						<Link to={path + '/hot'} activeClassName={classNames.activeSortLink}>hot</Link>
+						<button style={compact} onClick={() => this.toggleStations()}><Icon icon="menu"/></button>
 					</li>
 					<li>
-						<Link to={path + '/new'} activeClassName={classNames.activeSortLink}>new</Link>
+						<button style={compact} onClick={() => this.toggleDark()} ><Icon icon="brightness-1" /></button>
 					</li>
+
 					<li>{SEPARATOR}</li>
 					<li>top</li>
 					{['all', 'year', 'month', 'week', 'day'].map((sort) => {
@@ -171,6 +170,13 @@ export default class Playlist extends Component {
 							</li>
 						);
 					})}
+					<li>{SEPARATOR}</li>
+					<li>
+						<Link to={path + '/hot'} activeClassName={classNames.activeSortLink}>hot</Link>
+					</li>
+					<li>
+						<Link to={path + '/new'} activeClassName={classNames.activeSortLink}>new</Link>
+					</li>
 				</ul>
 			);
 		} else { // for TopThreads
@@ -289,4 +295,9 @@ function getStyle() {
 			overflowY: 'scroll'
 		}
 	};
+}
+const compact = {
+	 marginRight: '0px',
+	 paddingLeft: '0px',
+	 paddingRight: '0px'
 }
