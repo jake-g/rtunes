@@ -74,11 +74,9 @@ export function detectMobile() {
 
 export function toggleDarkMode(state) {
 	if (state) {
-		console.log('enabled dark mode');
 		const style = 'html {-webkit-filter: invert(100%) hue-rotate(180deg) brightness(110%) contrast(70%) sepia(20%) !important;text-shadow: 0 0 0 !important;background: rgb(41, 40, 38) !important;}img,iframe,video,*:not(object):not(body)>embed,object,*[style*="background:url"]:empty,*[style*="background-image:url"]:empty,*[style*="background: url"]:empty,*[style*="background-image: url"]:empty {-webkit-filter: invert(100%) hue-rotate(180deg) !important;}'
 		insertCss(style);
 	} else {
-		console.log('disabled dark mode');
 		document.getElementsByTagName('head')[0].lastChild.innerHTML = null;
 	}
 

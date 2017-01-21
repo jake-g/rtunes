@@ -24,7 +24,7 @@ export default class Playlist extends Component {
 		loadMore: null,
 		activePost: null,
 		mobile: false,
-		darkMode: false,
+		darkMode: true,
 		showStations: null
 	};
 	componentDidMount() {
@@ -35,6 +35,7 @@ export default class Playlist extends Component {
 	};
 	componentWillReceiveProps(nextProps) {
 		this.hideStations()
+		this.isChrome()
 		if (!this.getPosts(nextProps)) {
 			const {pathname, query} = nextProps.location;
 			fetchPosts(pathname, query).then(:: this.processPosts);
@@ -135,6 +136,13 @@ export default class Playlist extends Component {
 	};
 	renderSortLinks() {
 		const {subreddit, multi, username, post_id} = this.props.params;
+		let dark_toggle // only support dark for chrome
+		if (!!window.chrome) {
+			dark_toggle = (
+				<button style={compact} onClick={() => this.toggleDark()} ><Icon icon="brightness-1" /></button>
+			)
+		}
+
 		if (subreddit && !post_id || multi) {
 			const {pathname, search} = this.props.location;
 			const path = subreddit
@@ -150,7 +158,7 @@ export default class Playlist extends Component {
 						<button style={compact} onClick={() => this.toggleStations()}><Icon icon="menu"/></button>
 					</li>
 					<li>
-						<button style={compact} onClick={() => this.toggleDark()} ><Icon icon="brightness-1" /></button>
+						{dark_toggle}
 					</li>
 
 					<li>{SEPARATOR}</li>
