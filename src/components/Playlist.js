@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {fetchPosts} from '../utils/fetch-tracks';
 import ReactPlayer from 'react-player';
 import {Link} from 'react-router';
-import {dimensions, detectMobile, toggleDarkMode} from '../utils/utils';
+import {dimensions, detectMobile, toggleDarkMode, detectBrowser} from '../utils/utils';
 import classNames from '../styles/components/Playlist.scss';
 import Player from './Player';
 import Icon from './Icon';
@@ -25,17 +25,20 @@ export default class Playlist extends Component {
 		activePost: null,
 		mobile: false,
 		darkMode: true,
-		showStations: true
+		showStations: true,
+		browser: null
 	};
 	componentDidMount() {
-		this.setState({mobile: detectMobile()});
+		this.setState({
+			mobile: detectMobile(),
+			browser: detectBrowser()
+		});
 		window.addEventListener("resize", this.hideStations);
 		const {pathname, query} = this.props.location;
 		fetchPosts(pathname, query).then(:: this.processPosts);
 	};
 	componentWillReceiveProps(nextProps) {
 		this.hideStations()
-		this.isChrome()
 		if (!this.getPosts(nextProps)) {
 			const {pathname, query} = nextProps.location;
 			fetchPosts(pathname, query).then(:: this.processPosts);
@@ -136,8 +139,14 @@ export default class Playlist extends Component {
 	};
 	renderSortLinks() {
 		const {subreddit, multi, username, post_id} = this.props.params;
-		let dark_toggle // only support dark for chrome
-		if (!!window.chrome) {
+		const {browser} = this.state;
+		let dark_toggle
+		// TODO alert for unsupported browsers
+		if (browser !== 'Safari' && browser !== 'Chrome') {
+			window.alert('Warning: Browser not supported, use chrome');
+			console.log('unsupported', browser);
+		}
+		else if (this.state.browser === 'Chrome') { // no safari support
 			dark_toggle = (
 				<button style={compact} onClick={() => this.toggleDark()} ><Icon icon="brightness-1" /></button>
 			)
