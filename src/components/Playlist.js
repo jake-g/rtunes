@@ -25,7 +25,7 @@ export default class Playlist extends Component {
 		activePost: null,
 		mobile: false,
 		darkMode: true,
-		showStations: null
+		showStations: true
 	};
 	componentDidMount() {
 		this.setState({mobile: detectMobile()});
@@ -49,7 +49,7 @@ export default class Playlist extends Component {
 	hideStations = () => {
 		// TODO handle this with css mixin?
 		let dim = dimensions();
-		if (!this.state.showStations && dim.width < STATION_CLOSE) {
+		if (this.state.showStations && dim.width < STATION_CLOSE) {
 			this.setState({showStations: false});
 		}
 		if (dim.width > STATION_OPEN) {
