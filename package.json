@@ -16,7 +16,8 @@
     "prebuild": "npm run clean && npm run fetch-playlists",
     "build": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "postbuild": "cp index.html dist && cp images/favicon.ico dist",
-    "deploy": "npm run build && git commit dist/ data/ -m 'new build' && git push heroku -u master"
+    "build-native": "node build-native.js",
+    "deploy": "npm run build && git commit dist/ data/ -m 'new build' && git push heroku -u master && npm run build-native"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.1",
@@ -29,6 +30,7 @@
     "babel-preset-react-hmre": "^1.0.1",
     "babel-preset-stage-0": "^6.3.13",
     "css-loader": "^0.23.1",
+    "electron-installer-windows": "^0.2.0",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^1.0.1",

@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {fetchPosts} from '../utils/fetch-tracks';
 import ReactPlayer from 'react-player';
 import {Link} from 'react-router';
-import {dimensions, detectMobile, toggleDarkMode} from '../utils/utils';
+import {dimensions, detectMobile, toggleDarkMode, supportedBrowser} from '../utils/utils';
 import classNames from '../styles/components/Playlist.scss';
 import Player from './Player';
 import Icon from './Icon';
@@ -10,7 +10,7 @@ import Button from './Button';
 import Post from './Post';
 import Stations from './Stations';
 import {APP_NAME, IGNORE_AUTHORS, DEFAULT_POST_TITLE, SEPARATOR} from '../config';
-const STATION_CLOSE = 450
+const STATION_CLOSE = 500
 const STATION_OPEN = 700
 const MATCH_SOUNDCLOUD = /(snd\.sc|soundcloud\.com)/
 
@@ -136,10 +136,7 @@ export default class Playlist extends Component {
 	renderSortLinks() {
 		const {subreddit, multi, username, post_id} = this.props.params;
 		let dark_toggle // only support dark for chrome
-		// var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
-		// console.log(isSafari);
-		if (!!window.chrome) {
-
+		if (supportedBrowser() === 'chrome') {
 			dark_toggle = (
 				<button style={compact} onClick={() => this.toggleDark()} ><Icon icon="brightness-1" /></button>
 			)

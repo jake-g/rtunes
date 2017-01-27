@@ -1,5 +1,7 @@
 import lscache from 'lscache';
-import {stringify} from 'query-string';
+import {
+	stringify
+} from 'query-string';
 import fetch from 'isomorphic-fetch';
 import randomcolor from 'randomcolor';
 import insertCss from 'insert-css';
@@ -72,18 +74,21 @@ export function detectMobile() {
 	}
 }
 
-export function detectBrowser() {
+export function supportedBrowser() {
 
-    var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-    var isFirefox = typeof InstallTrigger !== 'undefined';
-    var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
-    var isChrome = !!window.chrome && !!window.chrome.webstore;
-    var isIE = /*@cc_on!@*/false || !!document.documentMode;
-    var isEdge = !isIE && !!window.StyleMedia;
-		if (!isChrome) {
-			alert('Warning: Works best with Chrome')
-		}
-};
+	var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+	var isFirefox = typeof InstallTrigger !== 'undefined';
+	var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 || (function(p) {
+		return p.toString() === "[object SafariRemoteNotification]";
+	})(!window['safari'] || safari.pushNotification);
+	var isChrome = !!window.chrome && !!window.chrome.webstore;
+	var isIE = /*@cc_on!@*/ false || !!document.documentMode;
+	var isEdge = !isIE && !!window.StyleMedia;
+	if (isFirefox || isIE || isEdge) { // unsupported
+		return false
+	}
+	return isSafari ? 'safari' : 'chrome'
+}
 
 export function toggleDarkMode(state) {
 	if (state) {
