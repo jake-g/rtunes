@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {fetchPosts} from '../utils/fetch-tracks';
 import ReactPlayer from 'react-player';
 import {Link} from 'react-router';
-import {dimensions, detectMobile, toggleDarkMode, detectBrowser} from '../utils/utils';
+import {dimensions, detectMobile, toggleDarkMode} from '../utils/utils';
 import classNames from '../styles/components/Playlist.scss';
 import Player from './Player';
 import Icon from './Icon';
@@ -26,13 +26,9 @@ export default class Playlist extends Component {
 		mobile: false,
 		darkMode: true,
 		showStations: true,
-		browser: null
 	};
 	componentDidMount() {
-		this.setState({
-			mobile: detectMobile(),
-			browser: detectBrowser()
-		});
+		this.setState({mobile: detectMobile()});
 		window.addEventListener("resize", this.hideStations);
 		const {pathname, query} = this.props.location;
 		fetchPosts(pathname, query).then(:: this.processPosts);
@@ -139,14 +135,11 @@ export default class Playlist extends Component {
 	};
 	renderSortLinks() {
 		const {subreddit, multi, username, post_id} = this.props.params;
-		const {browser} = this.state;
-		let dark_toggle
-		// TODO alert for unsupported browsers
-		if (browser !== 'Safari' && browser !== 'Chrome') {
-			window.alert('Warning: Browser not supported, use chrome');
-			console.log('unsupported', browser);
-		}
-		else if (this.state.browser === 'Chrome') { // no safari support
+		let dark_toggle // only support dark for chrome
+		// var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
+		// console.log(isSafari);
+		if (!!window.chrome) {
+
 			dark_toggle = (
 				<button style={compact} onClick={() => this.toggleDark()} ><Icon icon="brightness-1" /></button>
 			)
@@ -155,6 +148,7 @@ export default class Playlist extends Component {
 		if (subreddit && !post_id || multi) {
 			const {pathname, search} = this.props.location;
 			const path = subreddit
+
 				? `/r/${subreddit}`
 				: `/user/${username}/m/${multi}`;
 			return (

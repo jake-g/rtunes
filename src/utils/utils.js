@@ -73,21 +73,16 @@ export function detectMobile() {
 }
 
 export function detectBrowser() {
-    if (browser.prototype._cachedResult)
-        return browser.prototype._cachedResult;
+
     var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
     var isFirefox = typeof InstallTrigger !== 'undefined';
-    var isSafari = navigator.userAgent.indexOf("Safari") > -1;
+    var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
+    var isChrome = !!window.chrome && !!window.chrome.webstore;
     var isIE = /*@cc_on!@*/false || !!document.documentMode;
     var isEdge = !isIE && !!window.StyleMedia;
-    return browser.prototype._cachedResult =
-        isOpera ? 'Opera' :
-        isFirefox ? 'Firefox' :
-        isSafari ? 'Safari' :
-        isChrome ? 'Chrome' :
-        isIE ? 'IE' :
-        isEdge ? 'Edge' :
-        "Don't know";
+		if (!isChrome) {
+			alert('Warning: Works best with Chrome')
+		}
 };
 
 export function toggleDarkMode(state) {
