@@ -5,10 +5,11 @@ import React from 'react';
 export default function Icon({
 	icon,
 	className = '',
+	style=def_style.icon,
 	...extraProps
 }) {
 	return (
-		<svg {...extraProps} className={'icon-' + icon} style={style.icon} viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fit>
+		<svg {...extraProps} className={'icon-' + icon} style={style} viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fit>
 			{renderGraphic(icon)}
 		</svg>
 	);
@@ -154,7 +155,7 @@ function renderGraphic(icon) {
 	}
 }
 
-const style = {
+const def_style = {
 	icon: {
 		width: '1.6em',
 		height: '1.6em',

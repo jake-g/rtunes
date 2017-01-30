@@ -138,7 +138,7 @@ export default class Playlist extends Component {
 		let dark_toggle // only support dark for chrome
 		if (supportedBrowser() === 'chrome') {
 			dark_toggle = (
-				<button style={compact} onClick={() => this.toggleDark()} ><Icon icon="brightness-1" /></button>
+				<button style={compact} onClick={() => this.toggleDark()} ><Icon style={small_ico} icon="brightness-1" /></button>
 			)
 		}
 
@@ -150,7 +150,7 @@ export default class Playlist extends Component {
 				: `/user/${username}/m/${multi}`;
 			return (
 				<ul className={classNames.sort}>
-					<li>
+					<li style={{marginRight: '0px'}}>
 						<Link to={'/'}><Icon icon="home"/></Link>
 					</li>
 					{/*<li> <Icon icon="logo" /></li>*/}
@@ -308,4 +308,11 @@ const compact = {
 	 marginRight: '0px',
 	 paddingLeft: '0px',
 	 paddingRight: '0px'
+}
+
+const small_ico = {
+	width: '1em',
+	height: '1em',
+	// margin: 'auto 5px',
+	verticalAlign: 'middle'
 }
