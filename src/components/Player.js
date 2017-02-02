@@ -37,7 +37,7 @@ export default class Player extends Component {
   }
   hideVideo = ()  => {
     // hide video if window too small
-    const max_ratio = 1.3 // TODO define elsewhere?
+    const max_ratio = 1.4 // TODO define elsewhere?
     let dim = dimensions();
     let ratio = dim.app_width/dim.app_height
     if (ratio > max_ratio) {
