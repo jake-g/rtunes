@@ -76,26 +76,36 @@ export function detectMobile() {
 
 export function supportedBrowser() {
 
-	var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-	var isFirefox = typeof InstallTrigger !== 'undefined';
-	var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 || (function(p) {
+	var opera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+	var firefox = typeof InstallTrigger !== 'undefined';
+	var safari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 || (function(p) {
 		return p.toString() === "[object SafariRemoteNotification]";
 	})(!window['safari'] || safari.pushNotification);
-	var isChrome = !!window.chrome && !!window.chrome.webstore;
-	var isIE = /*@cc_on!@*/ false || !!document.documentMode;
-	var isEdge = !isIE && !!window.StyleMedia;
-	if (isFirefox || isIE || isEdge) { // unsupported
+	var ios = /iphone|ipod|ipad/.test(window.navigator.userAgent.toLowerCase());
+	var android = /android/.test(window.navigator.userAgent.toLowerCase());
+	var chrome = !!window.chrome && !!window.chrome.webstore;
+	var ie = /*@cc_on!@*/ false || !!document.documentMode;
+	var edge = !ie && !!window.StyleMedia;
+	if (firefox || ie || edge) { // unsupported
 		return false
 	}
-	return isSafari ? 'safari' : 'chrome'
+	else if (chrome || android) {
+		return 'chrome'
+	}
+	else if (safari || ios) {
+		return 'safari'
+	}
+	return true // unknown, but might still work
 }
 
 export function toggleDarkMode(state) {
 	if (state) {
-		const style = 'html {-webkit-filter: invert(100%) hue-rotate(180deg) brightness(110%) contrast(70%) sepia(20%) !important;text-shadow: 0 0 0 !important;background: rgb(41, 40, 38) !important;}img,iframe,video,*:not(object):not(body)>embed,object,*[style*="background:url"]:empty,*[style*="background-image:url"]:empty,*[style*="background: url"]:empty,*[style*="background-image: url"]:empty {-webkit-filter: invert(100%) hue-rotate(180deg) !important;}'
+		let style = 'html {-webkit-filter: invert(100%) hue-rotate(180deg) brightness(110%) contrast(70%) sepia(20%) !important;text-shadow: 0 0 0 !important;background: rgb(41, 40, 38) !important;}img,iframe,video,*:not(object):not(body)>embed,object,*[style*="background:url"]:empty,*[style*="background-image:url"]:empty,*[style*="background: url"]:empty,*[style*="background-image: url"]:empty {-webkit-filter: invert(100%) hue-rotate(180deg) !important;}'
+		if (supportedBrowser() === 'safari') {  // hack to make background work in safari
+			style = 'html {-webkit-filter: invert(100%) hue-rotate(180deg) brightness(110%) contrast(70%) sepia(20%) !important;text-shadow: 0 0 0 !important;}img,iframe,video,*:not(object):not(body)>embed,object,*[style*="background:url"]:empty,*[style*="background-image:url"]:empty,*[style*="background: url"]:empty,*[style*="background-image: url"]:empty {-webkit-filter: invert(100%) hue-rotate(180deg) !important;}'
+		}
 		insertCss(style);
 	} else {
 		document.getElementsByTagName('head')[0].lastChild.innerHTML = null;
 	}
-
 }

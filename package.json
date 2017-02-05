@@ -16,11 +16,11 @@
     "prebuild": "npm run clean && npm run fetch-playlists",
     "build": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "postbuild": "cp index.html dist && cp images/favicon.ico dist && cp dist/* mobile/",
-    "desktop": "node build-desktop.js",
+    "desktop": "npm run deploy && node build-desktop.js",
     "start-native": "node node_modules/react-native/local-cli/cli.js start",
     "ios": "cd mobile/ && react-native run-ios",
     "android": "cd mobile/ && react-native run-android",
-    "deploy": "npm run build && git commit dist/ data/ -m 'new build' && git push heroku -u master && npm run build-native"
+    "deploy": "npm run build && git commit dist/ data/ mobile/ -m 'new build' && git push heroku -u master"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.1",
