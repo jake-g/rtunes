@@ -20,6 +20,7 @@
     "start-native": "node node_modules/react-native/local-cli/cli.js start",
     "ios": "cd mobile/ && react-native run-ios",
     "android": "cd mobile/ && react-native run-android",
+    "android-release": "cd mobile/android/ && ./gradlew assembleRelease && cd .. && react-native run-android --variant=release",
     "deploy": "npm run build && git commit dist/ data/ mobile/ -m 'new build' && git push heroku -u master"
   },
   "devDependencies": {

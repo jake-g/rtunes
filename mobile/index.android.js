@@ -11,13 +11,22 @@ import {
 const Dimensions = require('Dimensions');
 const windowSize = Dimensions.get('window');
 const app = require('./index.html')
+// DEBUG source={app}
+// PRODUCTION source={{ uri: 'http://rtunes.xyz' }}
 
 export default class rtunes extends Component {
 	render() {
-
 		return (
 			<View style={styles.container}>
-				<WebView ref={'webview'} automaticallyAdjustContentInsets={false} source={app} style={styles.video} javaScriptEnabled={true} domStorageEnabled={true} decelerationRate="normal" startInLoadingState={true} scalesPageToFit={true}/>
+				<WebView ref={'webview'}
+					automaticallyAdjustContentInsets={false}
+					source={{ uri: 'http://rtunes.xyz' }}
+					style={styles.video}
+					javaScriptEnabled={true}
+					domStorageEnabled={true}
+					decelerationRate="normal"
+					startInLoadingState={true}
+					scalesPageToFit={true}/>
 			</View>
 		);
 	}
