@@ -1,0 +1,3 @@
+rootProject.name = 'rtunes'
+
+include ':app'
