@@ -1,6 +1,6 @@
 {
   "name": "rtunes",
-  "version": "1.3.0",
+  "version": "1.3.5",
   "description": "A React app to play music from reddit. Based on Pete Cook <pete@cookpete.com> (http://github.com/cookpete)",
   "author": "Jake",
   "license": "MIT",
@@ -15,8 +15,11 @@
     "fetch-playlists": "babel-node src/utils/fetch-playlists.js",
     "prebuild": "npm run clean && npm run fetch-playlists",
     "build": "NODE_ENV=production webpack --config webpack.config.prod.js",
-    "postbuild": "cp index.html dist && cp images/favicon.ico dist",
-    "build-native": "node build-native.js",
+    "postbuild": "cp index.html dist && cp images/favicon.ico dist && cp dist/* mobile/",
+    "desktop": "node build-desktop.js",
+    "start-native": "node node_modules/react-native/local-cli/cli.js start",
+    "ios": "cd mobile/ && react-native run-ios",
+    "android": "cd mobile/ && react-native run-android",
     "deploy": "npm run build && git commit dist/ data/ -m 'new build' && git push heroku -u master && npm run build-native"
   },
   "devDependencies": {
@@ -26,8 +29,10 @@
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.1",
     "babel-preset-es2015": "^6.3.13",
+    "babel-jest": "18.0.0",
     "babel-preset-react": "^6.3.13",
     "babel-preset-react-hmre": "^1.0.1",
+    "babel-preset-react-native": "1.9.1",
     "babel-preset-stage-0": "^6.3.13",
     "css-loader": "^0.23.1",
     "electron-installer-windows": "^0.2.0",
@@ -35,10 +40,12 @@
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^1.0.1",
     "isomorphic-fetch": "^2.2.1",
+    "jest": "18.1.0",
     "json-loader": "^0.5.4",
     "node-libs-browser": "^0.5.2",
     "node-sass": "^3.4.2",
     "postcss-loader": "^0.8.0",
+    "react-test-renderer": "~15.4.0-rc.4",
     "rimraf": "^2.5.0",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
@@ -54,11 +61,12 @@
     "normalize.css": "^3.0.3",
     "query-string": "^3.0.0",
     "randomcolor": "^0.4.4",
-    "react": "^0.14.6",
-    "react-dom": "^0.14.6",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-native": "^0.35.0",
     "react-player": "^0.5.8",
     "react-router": "^2.0.0-rc5",
-    "react-timeago": "^2.2.1"
+    "react-timeago": "^3.1.2"
   },
   "standard": {
     "parser": "babel-eslint"
