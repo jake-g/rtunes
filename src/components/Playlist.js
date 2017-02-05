@@ -29,12 +29,12 @@ export default class Playlist extends Component {
 	};
 	componentDidMount() {
 		this.setState({mobile: detectMobile()});
+		this.hideStations()
 		window.addEventListener("resize", this.hideStations);
 		const {pathname, query} = this.props.location;
 		fetchPosts(pathname, query).then(:: this.processPosts);
 	};
 	componentWillReceiveProps(nextProps) {
-		this.hideStations()
 		if (!this.getPosts(nextProps)) {
 			const {pathname, query} = nextProps.location;
 			fetchPosts(pathname, query).then(:: this.processPosts);
@@ -48,7 +48,7 @@ export default class Playlist extends Component {
 	hideStations = () => {
 		// TODO handle this with css mixin?
 		let dim = dimensions();
-		if (this.state.showStations && dim.width < STATION_CLOSE) {
+		if (this.state.mobile || (this.state.showStations && dim.width < STATION_CLOSE)) {
 			this.setState({showStations: false});
 		}
 		if (dim.width > STATION_OPEN) {

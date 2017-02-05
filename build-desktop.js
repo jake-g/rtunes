@@ -8,7 +8,7 @@ const conf = {
 	width: 800,
 	height: 600,
 	// inject: 'inject.js',
-	path: 'bin/',
+	path: 'desktop/',
 	os: 'mac',
 };
 
