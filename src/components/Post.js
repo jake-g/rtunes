@@ -15,7 +15,8 @@ export default class Post extends Component {
     post: PropTypes.object,
     onPlay: PropTypes.func,
     playing: PropTypes.bool,
-    showSubreddit: PropTypes.bool
+    showSubreddit: PropTypes.bool,
+    showThumb: PropTypes.bool  // not tested
   };
   shouldComponentUpdate(nextProps) {
     return (
@@ -79,13 +80,20 @@ export default class Post extends Component {
     }
     return nodes;
   }
+  getThumb(thumb) {
+    thumb = thumb || 'color'
+    if (this.props.showThumb) {
+      thumb == null
+    }
+    return thumb
+  }
 
   render() {
     const { post, playing } = this.props;
     return (
       <Item
         onClick={this.onPlay}
-        thumbnail={post.thumbnail || 'color'}
+        thumbnail={this.getThumb(post.thumbnail)}
         title={decode(post.title)}
         meta={this.renderMeta(post)}
         active={playing}
