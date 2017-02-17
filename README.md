@@ -18,5 +18,3 @@
 * build android app: `npm run android-release` 
 
 *Note: android app must be signed and needs a keystore to be generated see [link](https://facebook.github.io/react-native/docs/signed-apk-android.html). You may need to uninstall the debug app version from the device.*
-
-<center><img src="images/icon.png" alt="Drawing" style="width: 80px;"/><center/>
