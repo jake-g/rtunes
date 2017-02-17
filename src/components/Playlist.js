@@ -10,8 +10,8 @@ import Button from './Button';
 import Post from './Post';
 import Stations from './Stations';
 import {APP_NAME, IGNORE_AUTHORS, DEFAULT_POST_TITLE, SEPARATOR} from '../config';
-const STATION_CLOSE = 500
-const STATION_OPEN = 700
+const STATION_CLOSE = 450
+const STATION_OPEN = 620
 const MATCH_SOUNDCLOUD = /(snd\.sc|soundcloud\.com)/
 
 export default class Playlist extends Component {
@@ -129,13 +129,12 @@ export default class Playlist extends Component {
 	}
 	renderPost = (post) => {
 		const {activePost} = this.state;
-		return (<Post key={post.id} post={post} onPlay={this.playPost} playing={activePost
-			? activePost.id === post.id
-			: false} showSubreddit/>);
+		return (<Post key={post.id} post={post} onPlay={this.playPost}
+			playing={activePost ? activePost.id === post.id : false} />);
 	};
 	renderSortLinks() {
 		const {subreddit, multi, username, post_id} = this.props.params;
-		let dark_toggle // only support dark for chrome
+		let dark_toggle // only support dark for some browsers
 		if (supportedBrowser()) {
 			dark_toggle = (
 				<button style={compact} onClick={() => this.toggleDark()} ><Icon style={small_ico} icon="brightness-1" /></button>
@@ -274,7 +273,7 @@ function getStyle() {
 			height: '100%'
 		},
 		contents: {
-			flex: 'auto',
+			flex: '0 50 auto',
 			display: 'flex',
 			flexDirection: 'row',
 			height: '100%',
@@ -284,10 +283,9 @@ function getStyle() {
 			overflowY: 'scroll',
 			flex: '2 1 500px',
 			paddingLeft: '5px'
-			// height: '90vh'
 		},
 		header: {
-			flex: '0 0 32px',
+			flex: '0 1 32px',
 			width: '100%',
 			overflowX: 'scroll',
 			overflowY: 'hidden',

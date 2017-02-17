@@ -14,25 +14,25 @@ export default class Player extends Component {
 	};
 	state = {
 		playing: false,
-		video: false,
-		volume: 0.8,
+		video: false, // show vid or art
+		volume: 0.75,
 		played: 0,
 		loaded: 0,
 		duration: 0,
-		showVidToggle: false
+		showVidToggle: true
 	};
 	componentDidMount() {
-		this.hideVideo()
-		window.addEventListener("resize", this.hideVideo);
+		this.hideVideoIcon()
+		// window.addEventListener("resize", this.hideVideo);
 	}
 	componentWillReceiveProps(nextProps) {
 		if (this.props.activePost !== nextProps.activePost) {
 			this.setState({playing: true, played: 0, loaded: 0});
 		}
 	}
-	hideVideo = () => {
+	hideVideoIcon = () => {
 		// hide video if window too small
-		const max_ratio = 1.4 // TODO define elsewhere?
+		const max_ratio = 1.4
 		let dim = dimensions();
 		let ratio = dim.app_width / dim.app_height
 		if (ratio > max_ratio) {
@@ -97,7 +97,6 @@ export default class Player extends Component {
 		let vidIcon
 		if (this.state.showVidToggle) {
       let icon = this.state.video ? "fullscreen-exit" : "fullscreen"
-      console.log(icon);
 			vidIcon = (
 				<button onClick={this.onToggleVideo}>
 					<Icon icon={icon}/>
