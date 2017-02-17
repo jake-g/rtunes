@@ -136,7 +136,7 @@ export default class Playlist extends Component {
 	renderSortLinks() {
 		const {subreddit, multi, username, post_id} = this.props.params;
 		let dark_toggle // only support dark for chrome
-		if (supportedBrowser() === 'chrome' || supportedBrowser() === 'safari') {
+		if (supportedBrowser()) {
 			dark_toggle = (
 				<button style={compact} onClick={() => this.toggleDark()} ><Icon style={small_ico} icon="brightness-1" /></button>
 			)
