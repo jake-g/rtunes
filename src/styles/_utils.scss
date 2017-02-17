@@ -3,9 +3,3 @@
   white-space: nowrap;
   overflow: hidden;
 }
-
-@mixin desktop {
-  @media (min-width: $break-desktop) {
-    @content;
-  }
-}

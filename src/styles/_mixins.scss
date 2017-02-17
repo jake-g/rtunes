@@ -1,11 +1,4 @@
 @import './variables';
-
-@mixin desktop {
-  @media (min-width: $break-desktop) {
-    @content;
-  }
-}
-
 @mixin mobile {
   @media (min-width: $break-mobile) {
     @content;
