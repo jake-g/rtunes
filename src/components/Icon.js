@@ -5,7 +5,7 @@ import React from 'react';
 export default function Icon({
 	icon,
 	className = '',
-	style=def_style.icon,
+	style = def_style.icon,
 	...extraProps
 }) {
 	return (
@@ -85,10 +85,16 @@ function renderGraphic(icon) {
 					<path d="M7 4H5v5h2V4zm12 0h-2v9h2V4zM3 13h2v7h2v-7h2v-2H3v2zm12-6h-2V4h-2v3H9v2h6V7zm-4 13h2v-9h-2v9zm4-5v2h2v3h2v-3h2v-2h-6z"></path>
 				</g>
 			);
-		case 'video':
+		case 'fullscreen':
 			return (
 				<g>
 					<path d="M7 14h-2v5h5v-2h-3v-3zm-2-4h2v-3h3v-2h-5v5zm12 7h-3v2h5v-5h-2v3zm-3-12v2h3v3h2v-5h-5z"></path>
+				</g>
+			);
+		case 'fullscreen-exit':
+			return (
+				<g>
+					<path d="M5 16h3v3h2v-5h-5v2zm3-8h-3v2h5v-5h-2v3zm6 11h2v-3h3v-2h-5v5zm2-11v-3h-2v5h5v-2h-3z"></path>
 				</g>
 			);
 		case 'soundcloud':
@@ -123,17 +129,17 @@ function renderGraphic(icon) {
 				</g>
 			);
 		case 'hot':
-		  return (
-		    <g>
+			return (
+				<g>
 					<path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36c-2.02 2.4-3.23 5.51-3.23 8.89 0 4.42 3.58 8 8 8s8-3.58 8-8c0-5.39-2.59-10.2-6.5-13.33zm-1.79 18.33c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"></path>
 				</g>
-		  );
+			);
 		case 'new':
-		  return (
-		    <g>
+			return (
+				<g>
 					<path d="M23 12l-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68L23 12zm-10 5h-2v-2h2v2zm0-4h-2V7h2v6z"></path>
 				</g>
-		  );
+			);
 		case 'brightness-1':
 			return (
 				<g>
