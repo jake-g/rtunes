@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 
 import classNames from '../styles/containers/Home.scss';
-import header from '../styles/components/Playlist.scss';
 import playlists from '../../data/playlists.json';
 import TopThreads from '../components/TopThreads';
 import Item from '../components/Item';
 import Icon from '../components/Icon';
 import Button from '../components/Button';
-import About from './About'
+import Header from '../components/Header';
+
+import {Link} from 'react-router';
 import { pluralize } from '../utils/utils';
 import { APP_NAME, APP_TAGLINE, SEPARATOR } from '../config';
 
@@ -15,13 +16,12 @@ export default class Home extends Component {
 
   state = {
     limitSubs: 27,
-    limitGenres: 12,
+    limitGenres: 30,
     searchTerm: '',
-    showStations: false
   };
 
   componentDidMount() {
-    document.title = `${APP_NAME}${SEPARATOR}${APP_TAGLINE}`;
+    document.title = `${APP_NAME}${SEPARATOR}home`;
   }
 
   onChangeSearch = (e) => {
@@ -83,39 +83,20 @@ export default class Home extends Component {
     );
   }
 
-  toggleAbout() {
-    this.setState({ showAbout: !this.state.showAbout });
-  }
+
   render() {
+    document.body.style.overflow = 'auto';
     const { limitSubs, limitGenres, searchTerm } = this.state;
     const subreddits = playlists.subreddits.filter(this.filterSubreddit);
-    document.body.style.overflow = 'auto';
-    let about;
-    if (this.state.showAbout) {
-      about = (
-        <div>
-          <About />
-          <button onClick={() => this.toggleAbout()} >
-            <Icon icon='expand-less'/><a>close</a>
-          </button>
-        </div>
-      );
-    }
+    const header = (
+			<div>
+				<Header home={true}/>
+			</div>
+		);
+
     return (
       <section className={classNames.home}>
-        <div>
-          <ul className={header.sort}>
-            <li> <Icon icon="logo" /></li>
-            <li style={{fontSize: '20px'}}> rtunes </li>
-            <li style={{float: 'right'}}>
-              <a href="https://github.com/jake-g/rtunes" target='_blank'><Icon icon="github" /></a>
-              {SEPARATOR}
-              <button onClick={() => this.toggleAbout()} ><a><Icon icon='about' />
-              </a></button>
-            </li>
-          </ul>
-          {about}
-        </div>
+          {header}
         <h2>
           <Icon icon="playlist" />
           Playlists
@@ -137,6 +118,12 @@ export default class Home extends Component {
         }
 
         <h2>
+          <Icon icon="threads" />
+          Threads
+        </h2>
+        <TopThreads />
+
+        <h2>
           <Icon icon="genres" />
           Genres
         </h2>
@@ -154,12 +141,6 @@ export default class Home extends Component {
           Discover
         </h2>
         {playlists.discover.map(this.renderMulti)}
-
-        <h2>
-          <Icon icon="threads" />
-          Threads
-        </h2>
-        <TopThreads />
       </section>
     );
   }

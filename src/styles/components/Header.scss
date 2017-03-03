@@ -1,0 +1,16 @@
+@import '../variables';
+
+.sort {
+  margin-bottom: $spacing;
+  // text-align: right;
+  font-weight: 500;
+
+  li {
+    display: inline-block;
+    margin-right: $spacing;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

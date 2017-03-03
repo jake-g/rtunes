@@ -2,9 +2,10 @@ import React, {Component, PropTypes} from 'react';
 import {fetchPosts} from '../utils/fetch-tracks';
 import ReactPlayer from 'react-player';
 import {Link} from 'react-router';
-import {dimensions, detectMobile, toggleDarkMode, supportedBrowser} from '../utils/utils';
+import {dimensions, detectMobile} from '../utils/utils';
 import classNames from '../styles/components/Playlist.scss';
 import Player from './Player';
+import Header from './Header';
 import Icon from './Icon';
 import Button from './Button';
 import Post from './Post';
@@ -41,10 +42,6 @@ export default class Playlist extends Component {
 		}
 	};
 
-	toggleDark() {
-    this.setState({ darkMode: !this.state.darkMode });
-		toggleDarkMode(this.state.darkMode)
-	}
 	hideStations = () => {
 		// TODO handle this with css mixin?
 		let dim = dimensions();
@@ -55,11 +52,13 @@ export default class Playlist extends Component {
 			this.setState({showStations: true});
 		}
 	};
-	toggleStations() {
+
+	toggleStations = () => {
 		this.setState({
 			showStations: !this.state.showStations
 		});
-	}
+	};
+
 	processPosts({posts, loadMore}) {
 		const {pathname, search} = this.props.location;
 		const currentPosts = this.getPosts();
@@ -132,34 +131,22 @@ export default class Playlist extends Component {
 		return (<Post key={post.id} post={post} onPlay={this.playPost}
 			playing={activePost ? activePost.id === post.id : false} />);
 	};
-	renderSortLinks() {
-		const {subreddit, multi, username, post_id} = this.props.params;
-		let dark_toggle // only support dark for some browsers
-		if (supportedBrowser()) {
-			dark_toggle = (
-				<button style={compact} onClick={() => this.toggleDark()} ><Icon style={small_ico} icon="brightness-1" /></button>
-			)
-		}
 
+	render() {
+		const {loadMore, activePost, width} = this.state;
+		const {subreddit, multi, username, post_id} = this.props.params;
+
+		let style = getStyle();
+
+		let filters
 		if (subreddit && !post_id || multi) {
 			const {pathname, search} = this.props.location;
-			const path = subreddit
+		  const path = subreddit
 
-				? `/r/${subreddit}`
-				: `/user/${username}/m/${multi}`;
-			return (
-				<ul className={classNames.sort}>
-					<li style={{marginRight: '0px'}}>
-						<Link to={'/'}><Icon icon="home"/></Link>
-					</li>
-					{/*<li> <Icon icon="logo" /></li>*/}
-					<li>
-						<button style={compact} onClick={() => this.toggleStations()}><Icon icon="menu"/></button>
-					</li>
-					<li>
-						{dark_toggle}
-					</li>
-
+		    ? `/r/${subreddit}`
+		    : `/user/${username}/m/${multi}`;
+			filters = (
+				<div><ul>
 					<li>{SEPARATOR}</li>
 					<li>top</li>
 					{['all', 'year', 'month', 'week', 'day'].map((sort) => {
@@ -185,31 +172,12 @@ export default class Playlist extends Component {
 						<Link to={path + '/new'} activeClassName={classNames.activeSortLink}>new</Link>
 					</li>
 				</ul>
-			);
-		} else { // for TopThreads
-			return (
-				<ul className={classNames.sort}>
-					<li>
-						<Icon icon="logo"/></li>
-					<li>
-						<button onClick={() => this.toggleStations()}><Icon icon="menu"/></button>
-					</li>
-					<li>{SEPARATOR}</li>
-					<li>
-						<Link to={'/'}>home</Link>
-					</li>
-				</ul>
+			</div>
 			)
 		}
-		return null;
-	}
-	render() {
-		const {loadMore, activePost, width} = this.state;
-		let style = getStyle();
-
 		var header = (
-			<div className="header" style={style.header}>
-				{this.renderSortLinks()}
+			<div>
+					<Header filters={filters} toggleStations={this.toggleStations}/>
 			</div>
 		);
 
@@ -284,13 +252,6 @@ function getStyle() {
 			flex: '2 1 500px',
 			paddingLeft: '5px'
 		},
-		header: {
-			flex: '0 1 32px',
-			width: '100%',
-			overflowX: 'scroll',
-			overflowY: 'hidden',
-			whiteSpace: 'nowrap'
-		},
 		footer: {
 			flex: 'auto'
 		},
@@ -301,16 +262,4 @@ function getStyle() {
 			overflowY: 'scroll'
 		}
 	};
-}
-const compact = {
-	 marginRight: '0px',
-	 paddingLeft: '0px',
-	 paddingRight: '0px'
-}
-
-const small_ico = {
-	width: '1em',
-	height: '1em',
-	// margin: 'auto 5px',
-	verticalAlign: 'middle'
 }

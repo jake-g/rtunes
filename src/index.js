@@ -5,6 +5,8 @@ import { Router, Route, IndexRoute, Redirect, browserHistory, hashHistory } from
 import { trackPageView } from './analytics'
 import App from './containers/App';
 import Home from './containers/Home';
+import Download from './containers/Download';
+import About from './containers/About';
 import Playlist from './components/Playlist';
 
 // Hook up analytics
@@ -14,6 +16,9 @@ render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Home} />
+      <Route path="/download" component={Download}/>
+      <Route path="/about" component={About}/>
+
       <Route path="r/:subreddit" component={Playlist}>
         <Route path="comments/:post_id/:post_slug(/:comment_id)" />
         <Route path=":sort" />

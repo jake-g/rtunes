@@ -1,5 +1,6 @@
 /*jshint esversion: 6 */
 
+// TODO zip folders and delete folder
 const exec = require('child_process').exec;
 const conf = {
 	name: 'rtunes',
