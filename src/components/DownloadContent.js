@@ -13,15 +13,15 @@ export default function DownloadContent() {
 				Download
 			</h2>
 			<div className={classNames.platforms}>
-				<a style={style.button} href="https://github.com/jake-g/rtunes/releases/download/1.3.6-alpha/rtunes-win32-x64.zip" target='_blank'>
+				<a style={style.button} href="https://github.com/jake-g/rtunes/releases/download/1.3.7-alpha/rtunes-win32-x64.zip" target='_blank'>
 					<Icon style={style.bigIcon} icon="pc"/>
 					<h4>PC</h4>
 				</a>
-				<a style={style.button} href="https://github.com/jake-g/rtunes/releases/download/1.3.6-alpha/rtunes-darwin-x64.zip" target='_blank'>
+				<a style={style.button} href="https://github.com/jake-g/rtunes/releases/download/1.3.7-alpha/rtunes-darwin-x64.zip" target='_blank'>
 					<Icon style={style.bigIcon} icon="mac"/>
 					<h4>macOS</h4>
 				</a>
-				<a style={style.button} href="https://github.com/jake-g/rtunes/releases/download/1.3.6-alpha/rtunes-linux-x64.zip" target='_blank'>
+				<a style={style.button} href="https://github.com/jake-g/rtunes/releases/download/1.3.7-alpha/rtunes-darwin-x64.zip" target='_blank'>
 					<Icon style={style.bigIcon} icon="linux"/>
 					<h4>linux</h4>
 				</a>
