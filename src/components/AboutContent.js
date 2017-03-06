@@ -27,7 +27,7 @@ export default function AboutContent() {
           <dd>
             <ul>
               <li><b>browser :</b> chrome and safari browsers (mobile too) though others may also work</li>
-              <li><b>desktop :</b> windows, macOS and linux can be{' '}<Link to={'/get'}>downloaded</Link></li>
+              <li><b>desktop :</b> windows, macOS and linux can be{' '}<Link to={'/download'}>downloaded</Link></li>
               <li><b>mobile app :</b> Android and iOS apps ar in the works</li>
             </ul>
           </dd>
