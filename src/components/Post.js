@@ -63,9 +63,13 @@ export default class Post extends Component {
   }
   renderSource({ url }) {
     const source = this.getSource(url);
+    let viewBox = "0 0 24 24"
+    if (source === 'soundcloud') {
+        viewBox = "0 -5 24 24"  // needs shifting
+    }
     return (
       <a key="source" onClick={this.onLinkClick} href={url} target="_blank" title={source}>
-        <Icon icon={source} />
+        <Icon icon={source} viewBox={viewBox} />
       </a>
     );
   }
