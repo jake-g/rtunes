@@ -26,6 +26,7 @@ export default function DownloadContent() {
 					<h4>linux</h4>
 				</a>
 			</div>
+			<p style={{width: '450px', margin: '20px auto'}}>Other releases can be found <a href="https://github.com/jake-g/rtunes/releases/" target='_blank'>here</a></p>
 
 		</section>
 	)
