@@ -1,4 +1,4 @@
-import { TRACKING_ID } from './config';
+import { TRACKING_ID } from '../config';
 
 if (typeof window !== 'undefined') {
   /* eslint-disable */
