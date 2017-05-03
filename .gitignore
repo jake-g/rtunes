@@ -2,6 +2,5 @@
 *.zip
 *.log
 
-desktop
 node_modules
 npm-debug.log
