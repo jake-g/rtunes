@@ -174,14 +174,14 @@ export default class Playlist extends Component {
 			</div>
 			)
 		}
-		var header = (
+		let header = (
 			<div>
 					<Header filters={filters} toggleStations={this.toggleStations}/>
 			</div>
 		);
 
 		const posts = this.getPosts();
-		var playlist = (
+		let playlist = (
 			<div className="playlist" style={style.playlist}>
 				{this.renderPosts(posts)}
 				{posts && <Button disabled={!loadMore} onClick={loadMore}>
@@ -211,7 +211,7 @@ export default class Playlist extends Component {
 			);
 		}
 
-		var player = (
+		let player = (
 			<div className="player" style={style.footer}>
 				{info}
 				<Player activePost={activePost} onSkip={this.skip}/>

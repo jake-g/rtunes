@@ -22,8 +22,9 @@ export default class Header extends Component {
 		showStations: true,
 		showAbout: false,
 		showDownload: false,
+		showDlButton: true,
 		mobile: false,
-		supportedBrowser: ''
+		browser: ''
 	};
 
 	componentDidMount() {
@@ -33,9 +34,9 @@ export default class Header extends Component {
 	};
 
 	hideDownloads() { // no need to dl on electron or mobile
-		const {supportedBrowser, mobile} = this.state;
-		if (supportedBrowser === 'electron' || mobile) {
-			this.setState({showDownload: false});
+		const {browser, mobile} = this.state;
+		if (browser === 'electron' || mobile) {
+			this.setState({showDlButton: false});
 		}
 	}
 
@@ -66,24 +67,29 @@ export default class Header extends Component {
 
 	renderPost = () => {
 		const {activePost} = this.state;
-		return (<Post key={post.id} post={post} onPlay={this.playPost} playing={activePost
-			? activePost.id === post.id
-			: false}/>);
+		return (<Post
+				key={post.id} post={post}
+				onPlay={this.playPost}
+				playing={activePost ? activePost.id === post.id : false}
+		/>);
 	};
 
 	render() {
-		const {supportedBrowser, showAbout, showDownload} = this.state;
+		const {supportedBrowser, showAbout, showDownload, showDlButton} = this.state;
 		const {download, about} = this.props;
 		const aboutButton = (
 			<button style={style.compact} onClick={() => this.toggleAbout()}>
 				<a><Icon icon='about'/></a>
 			</button>
 		)
-		const downloadButton = (
-			<button style={style.compact} onClick={() => this.toggleDownload()}>
-				<a><Icon icon='download'/></a>
-			</button>
-		)
+		let downloadButton;
+		if (showDlButton) {
+			downloadButton = (
+				<button style={style.compact} onClick={() => this.toggleDownload()}>
+					<a><Icon icon='download'/></a>
+				</button>
+			)
+		}
 		const githubButton = (
 			<a href="https://github.com/jake-g/rtunes" target='_blank'><Icon icon="github"/></a>
 		)
@@ -123,6 +129,7 @@ export default class Header extends Component {
 						<Icon icon='expand-less'/>
 						<a>close</a>
 					</button>
+					{SEPARATOR}
 				</div>
 			);
 		}
@@ -130,7 +137,6 @@ export default class Header extends Component {
 		let rightSide = (
 			<div>
 				{downloadButton}
-				{SEPARATOR}
 				{aboutButton}
 			</div>
 		)

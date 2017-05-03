@@ -83,7 +83,7 @@ export function supportedBrowser() {
 	var ios = /iphone|ipod|ipad/.test(window.navigator.userAgent.toLowerCase());
 	var android = /android/.test(window.navigator.userAgent.toLowerCase());
 	var chrome = !!window.chrome && !!window.chrome.webstore;
-	var electron = window && window.process && window.process.type;
+	var electron = (window && window.process && window.process.type) || process.versions['electron'];
 	var ie = /*@cc_on!@*/ false || !!document.documentMode;
 	var edge = !ie && !!window.StyleMedia;
 	if (firefox || ie || edge) { // unsupported
