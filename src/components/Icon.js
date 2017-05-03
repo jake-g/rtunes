@@ -9,7 +9,7 @@ export default function Icon({
 	...extraProps
 }) {
 	return (
-		<svg className={'icon-' + icon} style={style} viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fit {...extraProps} >
+		<svg className={'icon-' + icon} style={style} viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" {...extraProps} >
 			{renderGraphic(icon)}
 		</svg>
 	);

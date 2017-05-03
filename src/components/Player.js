@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import { SC_CLIENT_ID } from '../config'
 import {dimensions} from '../utils/utils';
 import ReactPlayer from 'react-player';

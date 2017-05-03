@@ -1,5 +1,4 @@
-import React, { PropTypes } from 'react';
-
+import React from 'react';
 import { APP_NAME, SOURCE_URL } from '../config'
 import {Link} from 'react-router';
 import Icon from './Icon';
