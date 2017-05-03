@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {fetchPosts} from '../utils/fetch-tracks';
 import ReactPlayer from 'react-player';
 import {Link} from 'react-router';
-import {dimensions, detectMobile} from '../utils/utils';
+import {dimensions, detectMobile, getSource} from '../utils/utils';
 import classNames from '../styles/components/Playlist.scss';
 import Player from './Player';
 import Header from './Header';
@@ -13,7 +13,6 @@ import Stations from './Stations';
 import {APP_NAME, IGNORE_AUTHORS, DEFAULT_POST_TITLE, SEPARATOR} from '../config';
 const STATION_CLOSE = 450
 const STATION_OPEN = 620
-const MATCH_SOUNDCLOUD = /(snd\.sc|soundcloud\.com)/
 
 export default class Playlist extends Component {
 	static propTypes = {
@@ -63,10 +62,7 @@ export default class Playlist extends Component {
 		const {pathname, search} = this.props.location;
 		const currentPosts = this.getPosts();
 		posts = posts.filter(:: this.filterPost);
-		if (this.state.mobile) {  //TODO fix mobile soundcloud...
-			console.log('mobile detected...not showing soundcloud');
-			posts = posts.filter(:: this.filterSoundcloud);
-		}
+
 		if (currentPosts) {
 			posts = currentPosts.concat(posts);
 		}
@@ -81,11 +77,13 @@ export default class Playlist extends Component {
 		});
 	}
 	filterPost(post) {
-		return ReactPlayer.canPlay(post.url) && IGNORE_AUTHORS.indexOf(post.author) === -1;
+		const source = getSource(post.url);
+		if (this.state.mobile && source === "soundcloud") {
+			console.log('mobile detected...not showing soundcloud');
+			return
+		}
+		return source && IGNORE_AUTHORS.indexOf(post.author) === -1;
 	}
-  filterSoundcloud(post) {
-    return !post.url.match(MATCH_SOUNDCLOUD)
-  }
 	getPosts(props = this.props) {
 		const {pathname, search} = props.location;
 		const {posts} = this.state;

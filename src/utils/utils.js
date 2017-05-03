@@ -100,7 +100,7 @@ export function supportedBrowser() {
 
 export function toggleDarkMode(state) {
 	if (state) {
-		let style = 'html {-webkit-filter: invert(100%) hue-rotate(180deg) brightness(110%) contrast(70%) sepia(20%) !important;text-shadow: 0 0 0 !important;background: rgb(41, 40, 38) !important;}img,iframe,video,*:not(object):not(body)>embed,object,*[style*="background:url"]:empty,*[style*="background-image:url"]:empty,*[style*="background: url"]:empty,*[style*="background-image: url"]:empty {-webkit-filter: invert(100%) hue-rotate(180deg) !important;}'
+		let style = 'html {-webkit-filter: invert(100%) hue-rotate(180deg) brightness(110%) contrast(70%) sepia(20%) !important;text-shadow: 0 0 0 !important;background: rgb(41, 40, 38) !important;}img,iframe,video,html5-video-player,*:not(object):not(body)>embed,object,*[style*="background:url"]:empty,*[style*="background-image:url"]:empty,*[style*="background: url"]:empty,*[style*="background-image: url"]:empty {-webkit-filter: invert(100%) hue-rotate(180deg) !important;}'
 		if (supportedBrowser() === 'safari') {  // hack to make background work in safari
 			style = 'html {-webkit-filter: invert(100%) hue-rotate(180deg) brightness(110%) contrast(70%) sepia(20%) !important;text-shadow: 0 0 0 !important;}img,iframe,video,*:not(object):not(body)>embed,object,*[style*="background:url"]:empty,*[style*="background-image:url"]:empty,*[style*="background: url"]:empty,*[style*="background-image: url"]:empty {-webkit-filter: invert(100%) hue-rotate(180deg) !important;}'
 		}
@@ -108,4 +108,16 @@ export function toggleDarkMode(state) {
 	} else {
 		document.getElementsByTagName('head')[0].lastChild.innerHTML = null;
 	}
+}
+
+export function getSource(url) {
+	const MATCH_YOUTUBE = /(youtu\.be|youtube\.com)/
+	const MATCH_VIMEO = /(vimeo\.com)/
+	const MATCH_SOUNDCLOUD = /(snd\.sc|soundcloud\.com)/
+
+	return (
+		url.match(MATCH_VIMEO) ? "vimeo" :
+		url.match(MATCH_SOUNDCLOUD) ? "soundcloud" :
+		url.match(MATCH_YOUTUBE) ? "youtube" : null
+	)
 }

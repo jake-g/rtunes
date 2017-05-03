@@ -3,12 +3,10 @@ import TimeAgo from 'react-timeago';
 import { Link } from 'react-router';
 
 import Item from './Item';
-import { pluralize, isNumber, decode } from '../utils/utils';
+import { pluralize, isNumber, decode, getSource } from '../utils/utils';
 import { SEPARATOR } from '../config';
 import Icon from './Icon';
-const MATCH_YOUTUBE = /(youtu\.be|youtube\.com)/
-const MATCH_VIMEO = /(vimeo\.com)/
-const MATCH_SOUNDCLOUD = /(snd\.sc|soundcloud\.com)/
+
 
 export default class Post extends Component {
   static propTypes = {
@@ -54,15 +52,9 @@ export default class Post extends Component {
       </Link>
     );
   }
-  getSource(url) {
-    return (
-      url.match(MATCH_VIMEO) ? "vimeo" :
-      url.match(MATCH_SOUNDCLOUD) ? "soundcloud" :
-      url.match(MATCH_YOUTUBE) ? "youtube" : null
-    )
-  }
+
   renderSource({ url }) {
-    const source = this.getSource(url);
+    const source = getSource(url);
     let viewBox = "0 0 24 24"
     if (source === 'soundcloud') {
         viewBox = "0 -5 24 24"  // needs shifting

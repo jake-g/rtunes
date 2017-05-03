@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import { SC_CLIENT_ID } from '../config'
 import {dimensions} from '../utils/utils';
 import ReactPlayer from 'react-player';
 
@@ -96,7 +97,9 @@ export default class Player extends Component {
 		const style = getStyle(this.state.video)
 		let vidIcon
 		if (this.state.showVidToggle) {
-      let icon = this.state.video ? "fullscreen-exit" : "fullscreen"
+			let icon = this.state.video
+				? "fullscreen-exit"
+				: "fullscreen"
 			vidIcon = (
 				<button onClick={this.onToggleVideo}>
 					<Icon icon={icon}/>
@@ -107,11 +110,20 @@ export default class Player extends Component {
 		return (
 			<div>
 				<section className={classNames.playerWrapper} style={style.wrapper}>
-					<ReactPlayer ref="player" className={classNames.player} width="100%" height="100%" url={activePost
-						? activePost.url
-						: null} playing={playing} volume={volume} onPlay={this.onPlayerPlay} onPause={this.onPlayerPause} onProgress={this.onPlayerProgress} onDuration={this.onPlayerDuration} onEnded={this.onPlayerEnded} onError={this.onPlayerError} youtubeConfig={{
-						preload: true
-					}}/>
+					<ReactPlayer ref="player"
+						className={classNames.player}
+						width="100%" height="100%"
+						url={activePost ? activePost.url : null}
+						playing={playing} volume={volume}
+						onPlay={this.onPlayerPlay}
+						onPause={this.onPlayerPause}
+						onProgress={this.onPlayerProgress}
+						onDuration={this.onPlayerDuration}
+						onEnded={this.onPlayerEnded}
+						onError={this.onPlayerError}
+						youtubeConfig={{preload: true}}
+						soundcloudConfig={{clientId: SC_CLIENT_ID, showArtwork: true}}
+						/>
 				</section>
 				<section className={activePost
 					? classNames.controls
