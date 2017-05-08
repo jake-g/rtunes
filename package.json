@@ -16,7 +16,7 @@
     "prebuild": "npm run clean && npm run fetch-playlists",
     "build": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "postbuild": "cp index.html dist && cp images/favicon.ico dist && cp dist/* mobile/",
-    "desktop": "node ./desktop/build-apps.js",
+    "desktop": "node desktop/build-apps.js",
     "start-native": "node node_modules/react-native/local-cli/cli.js start",
     "ios": "cd mobile/ && react-native run-ios",
     "android": "cd mobile/ && react-native run-android",
