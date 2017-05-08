@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import 'normalize.css/normalize.css';
 import '../styles/defaults.scss';
 import classNames from '../styles/containers/App.scss';
-import { updateFavicon, supportedBrowser } from '../utils/utils';
+import { updateFavicon, whatBrowser, detectMobile } from '../utils/utils';
 import { APP_NAME, AUTHOR_URL, SOURCE_URL, SEPARATOR } from '../config';
 
 export default class App extends Component {
@@ -14,7 +14,7 @@ export default class App extends Component {
   };
   componentDidMount() {
     const { params, location } = this.props;
-    if (!supportedBrowser()) {
+    if (!whatBrowser) {
       alert('Warning: Works best with Chrome');
     }
   }

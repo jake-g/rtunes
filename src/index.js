@@ -8,6 +8,15 @@ import Home from './containers/Home';
 import Download from './containers/Download';
 import About from './containers/About';
 import Playlist from './components/Playlist';
+import { whatBrowser, detectMobile } from './utils/utils';
+
+
+// Store constants
+const browser = whatBrowser(); // False if unsupported
+const mobile = detectMobile();
+console.log('root', browser, typeof browser, mobile, typeof mobile);
+localStorage.setItem('browser', browser);
+localStorage.setItem('mobile', mobile);
 
 // Hook up analytics
 browserHistory.listen(trackPageView)

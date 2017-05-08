@@ -6,7 +6,7 @@ import {SEPARATOR} from '../config';
 import About from './AboutContent'
 import Download from './DownloadContent'
 import Icon from './Icon';
-import {toggleDarkMode, supportedBrowser, detectMobile} from '../utils/utils';
+import {toggleDarkMode} from '../utils/utils';
 
 export default class Header extends Component {
 	static propTypes = {
@@ -23,19 +23,18 @@ export default class Header extends Component {
 		showAbout: false,
 		showDownload: false,
 		showDlButton: true,
-		mobile: false,
 		browser: ''
 	};
 
 	componentDidMount() {
-		this.setState({supportedBrowser: supportedBrowser()});
-		this.setState({mobile: detectMobile()});
 		this.hideDownloads();
 	};
 
 	hideDownloads() { // no need to dl on electron or mobile
-		const {browser, mobile} = this.state;
-		if (browser === 'electron' || mobile) {
+		const mobile = JSON.parse(localStorage.getItem('mobile'));
+		const browser = localStorage.getItem('browser');
+		console.log('header', browser, typeof browser, mobile, typeof mobile);
+		if (mobile || browser === 'electron') {
 			this.setState({showDlButton: false});
 		}
 	}
@@ -75,7 +74,7 @@ export default class Header extends Component {
 	};
 
 	render() {
-		const {supportedBrowser, showAbout, showDownload, showDlButton} = this.state;
+		const {browser, showAbout, showDownload, showDlButton} = this.state;
 		const {download, about} = this.props;
 		const aboutButton = (
 			<button style={style.compact} onClick={() => this.toggleAbout()}>
@@ -101,7 +100,7 @@ export default class Header extends Component {
 		}
 
 		let dark_toggle // only support dark for some browsers
-		if (supportedBrowser) {
+		if (browser) {
 			dark_toggle = (
 				<button style={style.compact} onClick={() => this.toggleDark()}><Icon style={style.small_ico} icon="brightness-1"/></button>
 			)

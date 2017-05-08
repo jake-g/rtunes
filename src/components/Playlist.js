@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {fetchPosts} from '../utils/fetch-tracks';
 import ReactPlayer from 'react-player';
 import {Link} from 'react-router';
-import {dimensions, detectMobile, getSource} from '../utils/utils';
+import {dimensions, getSource} from '../utils/utils';
 import classNames from '../styles/components/Playlist.scss';
 import Player from './Player';
 import Header from './Header';
@@ -24,12 +24,10 @@ export default class Playlist extends Component {
 		posts: {},
 		loadMore: null,
 		activePost: null,
-		mobile: false,
 		darkMode: true,
 		showStations: true,
 	};
 	componentDidMount() {
-		this.setState({mobile: detectMobile()});
 		this.hideStations()
 		window.addEventListener("resize", this.hideStations);
 		const {pathname, query} = this.props.location;
@@ -44,8 +42,10 @@ export default class Playlist extends Component {
 
 	hideStations = () => {
 		// TODO handle this with css mixin?
+		const {showStations} = this.state;
+		const mobile = JSON.parse(localStorage.getItem('mobile'));
 		let dim = dimensions();
-		if (this.state.mobile || (this.state.showStations && dim.width < STATION_CLOSE)) {
+		if (mobile || (showStations && dim.width < STATION_CLOSE)) {
 			this.setState({showStations: false});
 		}
 		if (dim.width > STATION_OPEN) {
