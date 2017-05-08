@@ -1,7 +1,8 @@
 /*jshint esversion: 6 */
 const exec = require('child_process').exec;
 
-const builds = ['mac', 'linux', 'windows', 'windows32', 'windows --arch "ia32"'];
+// const builds = ['mac', 'linux', 'windows', 'windows32', 'windows --arch "ia32"'];
+const builds = ['mac'];
 const conf = {
 	name: 'rtunes',
 	url: 'http://rtunes.xyz',
@@ -9,7 +10,7 @@ const conf = {
 	width: 800,
 	height: 600,
 	// inject: 'inject.js',
-	path: 'desktop/',
+	path: './desktop/',
 	os: 'mac',
 };
 
