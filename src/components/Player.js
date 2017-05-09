@@ -21,15 +21,21 @@ export default class Player extends Component {
 		played: 0,
 		loaded: 0,
 		duration: 0,
-		showVidToggle: true
+		showVidToggle: true,
+		favorite: false
 	};
 	componentDidMount() {
 		this.hideVideoIcon()
+
 		// window.addEventListener("resize", this.hideVideo);
 	}
 	componentWillReceiveProps(nextProps) {
 		if (this.props.activePost !== nextProps.activePost) {
-			this.setState({playing: true, played: 0, loaded: 0});
+			const nextUrl = nextProps.activePost.url || '';
+			this.setState({
+				playing: true, played: 0, loaded: 0,
+				favorite: this.checkFav(nextUrl)
+			});
 		}
 	}
 	hideVideoIcon = () => {
@@ -43,6 +49,44 @@ export default class Player extends Component {
 			this.setState({showVidToggle: true});
 		}
 	};
+	addFavorite = (url) => {
+		// get set or make blank array if not stored,
+		let favorites = new Set(JSON.parse(localStorage.getItem('favorites'))) || [];
+		favorites.add(url);
+		console.log('favorite', url);
+		console.log('current facorites', favorites);
+		localStorage.setItem('favorites', JSON.stringify(favorites));
+	};
+	removeFavorite = (url) => {
+		let favorites = new Set(JSON.parse(localStorage.getItem('favorites'))) || [];
+		favorites.delete(url);
+		console.log('remove favorite', url);
+		console.log('current facorites', favorites);
+		localStorage.setItem('favorites', JSON.stringify(favorites));
+	};
+	// TODO make component
+	getFav = () => {
+		return new Set(JSON.parse(localStorage.getItem('favorites'))) || new Set();
+	}
+	addFav = (url) => {
+		const favorites = this.getFav();
+		favorites.add(url);
+		console.log('favorite', url);
+		console.log('current facorites', favorites);
+		return localStorage.setItem('favorites', JSON.stringify(favorites));
+	}
+	removeFav = (url) => {
+		const favorites = this.getFav();
+		favorites.delete(url);
+		console.log('remove favorite', url);
+		console.log('current facorites', favorites);
+		return localStorage.setItem('favorites', JSON.stringify(favorites));
+	}
+	checkFav = (url) => {
+		const favorites = this.getFav();
+		console.log('contains favorite', url, favorites.has(url));
+		return favorites.has(url);
+	}
 	onPlayerPlay = () => {
 		this.setState({playing: true});
 	};
@@ -66,6 +110,18 @@ export default class Player extends Component {
 	onTogglePlaying = () => {
 		this.setState({
 			playing: !this.state.playing
+		});
+	};
+	onClickNext = () => {
+		this.props.onSkip();
+	};
+	onToggleFavorite = () => {
+		const {activePost} = this.props;
+		const {favorite} = this.state;
+		let url = activePost.url;
+		favorite ? this.removeFavorite(url) : this.addFavorite(url);
+		this.setState({
+			favorite: !favorite
 		});
 	};
 	onToggleVideo = () => {
@@ -98,15 +154,23 @@ export default class Player extends Component {
 		const style = getStyle(this.state.video)
 		let vidIcon
 		if (this.state.showVidToggle) {
-			let icon = this.state.video
+			let iconVid = this.state.video
 				? "fullscreen-exit"
 				: "fullscreen"
 			vidIcon = (
 				<button onClick={this.onToggleVideo}>
-					<Icon icon={icon}/>
+					<Icon icon={iconVid}/>
 				</button>
 			)
 		}
+		let iconFav = this.state.favorite
+			? "favorite"
+			: "favorite-outline"
+		let favIcon = (
+			<button onClick={this.onToggleFavorite}>
+				<Icon icon={iconFav}/>
+			</button>
+		)
 
 		return (
 			<div>
@@ -144,6 +208,7 @@ export default class Player extends Component {
 					<Duration className={classNames.duration} seconds={duration * played}/>
 					<Range className={classNames.timeSlider} primary={played} secondary={loaded} onSeekStart={this.onSeekStart} onSeekChange={this.onSeekChange} onSeekEnd={this.onSeekEnd}/>
 					<Duration className={classNames.duration} seconds={duration}/>
+					{favIcon}
 					<div className={classNames.volumeIcon}>
 						<Icon icon="volume"/>
 					</div>
