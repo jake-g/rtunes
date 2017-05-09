@@ -23,7 +23,6 @@ export default class Header extends Component {
 		showAbout: false,
 		showDownload: false,
 		showDlButton: true,
-		browser: ''
 	};
 
 	componentDidMount() {
@@ -33,7 +32,7 @@ export default class Header extends Component {
 	hideDownloads() { // no need to dl on electron or mobile
 		const mobile = JSON.parse(localStorage.getItem('mobile'));
 		const browser = localStorage.getItem('browser');
-		console.log('header', browser, typeof browser, mobile, typeof mobile);
+		this.setState({browser: browser});
 		if (mobile || browser === 'electron') {
 			this.setState({showDlButton: false});
 		}
@@ -66,7 +65,7 @@ export default class Header extends Component {
 
 	renderPost = () => {
 		const {activePost} = this.state;
-		return (<Post
+		return (<Track
 				key={post.id} post={post}
 				onPlay={this.playPost}
 				playing={activePost ? activePost.id === post.id : false}
@@ -102,7 +101,7 @@ export default class Header extends Component {
 		let dark_toggle // only support dark for some browsers
 		if (browser) {
 			dark_toggle = (
-				<button style={style.compact} onClick={() => this.toggleDark()}><Icon style={style.small_ico} icon="brightness-1"/></button>
+				<button style={style.compact} onClick={() => this.toggleDark()}><Icon icon="invert-colors"/></button>
 			)
 		}
 
@@ -136,27 +135,10 @@ export default class Header extends Component {
 		let rightSide = (
 			<div>
 				{downloadButton}
+				{dark_toggle}
 				{aboutButton}
 			</div>
 		)
-		if (download === true) {
-			rightSide = (
-				<div>
-					{aboutButton}
-					{SEPARATOR}
-					{githubButton}
-				</div>
-			)
-		}
-		if (about === true) {
-			rightSide = (
-				<div>
-					{downloadButton}
-					{SEPARATOR}
-					{githubButton}
-				</div>
-			)
-		}
 
 		var playlist = (
 			<ul className={classNames.sort}>
@@ -168,7 +150,6 @@ export default class Header extends Component {
 				<li>
 					<button style={style.compact} onClick={() => this.props.toggleStations()}><Icon icon="menu"/></button>
 				</li>
-				<li>{dark_toggle}</li>
 				<li>{this.props.filters}</li>
 				<li style={{
 					float: 'right'

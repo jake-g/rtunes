@@ -12,11 +12,8 @@ import { whatBrowser, detectMobile } from './utils/utils';
 
 
 // Store constants
-const browser = whatBrowser(); // False if unsupported
-const mobile = detectMobile();
-console.log('root', browser, typeof browser, mobile, typeof mobile);
-localStorage.setItem('browser', browser);
-localStorage.setItem('mobile', mobile);
+localStorage.setItem('browser', whatBrowser());
+localStorage.setItem('mobile', detectMobile());
 
 // Hook up analytics
 browserHistory.listen(trackPageView)

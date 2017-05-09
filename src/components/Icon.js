@@ -9,7 +9,7 @@ export default function Icon({
 	...extraProps
 }) {
 	return (
-		<svg className={'icon-' + icon} style={style} viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" {...extraProps} >
+		<svg className={'icon-' + icon} style={style} viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" {...extraProps}>
 			{renderGraphic(icon)}
 		</svg>
 	);
@@ -140,10 +140,16 @@ function renderGraphic(icon) {
 					<path d="M23 12l-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68L23 12zm-10 5h-2v-2h2v2zm0-4h-2V7h2v6z"></path>
 				</g>
 			);
-		case 'brightness-1':
+		case 'black-dot':
 			return (
 				<g>
 					<circle cx="12" cy="12" r="10"></circle>
+				</g>
+			);
+		case 'invert-colors':
+			return (
+				<g>
+					<path d="M17.66 7.93l-5.66-5.66-5.66 5.66c-3.12 3.12-3.12 8.19 0 11.31 1.56 1.56 3.61 2.34 5.66 2.34 2.05 0 4.1-.78 5.66-2.34 3.12-3.12 3.12-8.19 0-11.31zm-5.66 11.66c-1.6 0-3.11-.62-4.24-1.76-1.14-1.14-1.76-2.64-1.76-4.24s.62-3.11 1.76-4.24l4.24-4.25v14.49z"></path>
 				</g>
 			);
 		case 'home':
@@ -162,6 +168,18 @@ function renderGraphic(icon) {
 			return (
 				<g>
 					<path d="M19 9h-4v-6h-6v6h-4l7 7 7-7zm-14 9v2h14v-2h-14z"></path>
+				</g>
+			);
+		case 'favorite':
+			return (
+				<g>
+					<path d="M12 21.35l-1.45-1.32c-5.15-4.67-8.55-7.75-8.55-11.53 0-3.08 2.42-5.5 5.5-5.5 1.74 0 3.41.81 4.5 2.09 1.09-1.28 2.76-2.09 4.5-2.09 3.08 0 5.5 2.42 5.5 5.5 0 3.78-3.4 6.86-8.55 11.54l-1.45 1.31z"></path>
+				</g>
+			);
+		case 'favorite-outline':
+			return (
+				<g>
+					<path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09-1.09-1.28-2.76-2.09-4.5-2.09-3.08 0-5.5 2.42-5.5 5.5 0 3.78 3.4 6.86 8.55 11.54l1.45 1.31 1.45-1.32c5.15-4.67 8.55-7.75 8.55-11.53 0-3.08-2.42-5.5-5.5-5.5zm-4.4 15.55l-.1.1-.1-.1c-4.76-4.31-7.9-7.16-7.9-10.05 0-2 1.5-3.5 3.5-3.5 1.54 0 3.04.99 3.57 2.36h1.87c.52-1.37 2.02-2.36 3.56-2.36 2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"></path>
 				</g>
 			);
 		case 'linux':
