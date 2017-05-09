@@ -9,7 +9,7 @@ import Player from './Player';
 import Header from './Header';
 import Icon from './Icon';
 import Button from './Button';
-import Post from './Post';
+import Track from './Track';
 import Stations from './Stations';
 import {APP_NAME, IGNORE_AUTHORS, DEFAULT_POST_TITLE, SEPARATOR} from '../config';
 const STATION_CLOSE = 450
@@ -127,7 +127,7 @@ export default class Playlist extends Component {
 	}
 	renderPost = (post) => {
 		const {activePost} = this.state;
-		return (<Post key={post.id} post={post} onPlay={this.playPost}
+		return (<Track key={post.id} post={post} onPlay={this.playPost}
 			playing={activePost ? activePost.id === post.id : false} />);
 	};
 

@@ -9,7 +9,7 @@ import { SEPARATOR } from '../config';
 import Icon from './Icon';
 
 
-export default class Post extends Component {
+export default class Tracks extends Component {
   static propTypes = {
     post: PropTypes.object,
     onPlay: PropTypes.func,
