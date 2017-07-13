@@ -77,13 +77,11 @@ export function detectMobile() {
 export function whatBrowser() {
 	var opera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 	var firefox = typeof InstallTrigger !== 'undefined';
-	var safari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 || (function(p) {
-		return p.toString() === "[object SafariRemoteNotification]";
-	})(!window['safari'] || safari.pushNotification);
+	var safari = navigator.userAgent.indexOf("Safari") != -1
 	var ios = /iphone|ipod|ipad/.test(window.navigator.userAgent.toLowerCase());
 	var android = /android/.test(window.navigator.userAgent.toLowerCase());
 	var chrome = !!window.chrome && !!window.chrome.webstore;
-	var electron = (window && window.process && window.process.type) || process.versions['electron'];
+	var electron = (typeof process !== "undefined") && process.versions && (process.versions.electron !== undefined);
 	var ie = /*@cc_on!@*/ false || !!document.documentMode;
 	var edge = !ie && !!window.StyleMedia;
 	if (firefox || ie || edge) { // unsupported
@@ -106,9 +104,18 @@ export function whatBrowser() {
 
 export function toggleDarkMode(state) {
 	if (state) {
-		let style = 'html {-webkit-filter: invert(100%) hue-rotate(180deg) brightness(110%) contrast(70%) sepia(20%) !important;text-shadow: 0 0 0 !important;background: rgb(41, 40, 38) !important;}img,iframe,video,html5-video-player,*:not(object):not(body)>embed,object,*[style*="background:url"]:empty,*[style*="background-image:url"]:empty,*[style*="background: url"]:empty,*[style*="background-image: url"]:empty {-webkit-filter: invert(100%) hue-rotate(180deg) !important;}'
+		let style = `html {
+		  -webkit-filter: invert(100%) hue-rotate(180deg) brightness(110%) contrast(70%) sepia(20%) !important;
+		  text-shadow: 0 0 0 !important;
+		}
+		img,*:not(object):not(body)>embed,object,*[style*="background:url"]:empty,*[style*="background-image:url"]:empty,*[style*="background: url"]:empty,*[style*="background-image: url"]:empty {
+		  -webkit-filter: invert(100%) hue-rotate(180deg) !important;
+		}
+		.Player-player, .html5-video-player {
+			-webkit-filter: invert(100%) hue-rotate(180deg) !important;
+		}`
 		if (whatBrowser() === 'safari') { // hack to make background work in safari
-			style = 'html {-webkit-filter: invert(100%) hue-rotate(180deg) brightness(110%) contrast(70%) sepia(20%) !important;text-shadow: 0 0 0 !important;}img,iframe,video,*:not(object):not(body)>embed,object,*[style*="background:url"]:empty,*[style*="background-image:url"]:empty,*[style*="background: url"]:empty,*[style*="background-image: url"]:empty {-webkit-filter: invert(100%) hue-rotate(180deg) !important;}'
+			style.replace(/background: rgb(41, 40, 38) !important;/, '');  // remove
 		}
 		insertCss(style);
 	} else {
