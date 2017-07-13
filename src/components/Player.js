@@ -42,8 +42,10 @@ export default class Player extends Component {
 		// hide video if window too small
 		const max_ratio = 1.4
 		let dim = dimensions();
-		let ratio = dim.app_width / dim.app_height
-		if (ratio > max_ratio) {
+		let width = Math.min(dim.app_width, dim.width);
+		let height = Math.min(dim.app_height, dim.height);
+		height = height < 160 ? dim.height : height; // fixes safari
+		if (width / height > max_ratio || height < 320 || width < 400 ) {
 			this.setState({video: false, showVidToggle: false});
 		} else {
 			this.setState({showVidToggle: true});
