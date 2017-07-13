@@ -86,7 +86,7 @@ export default class Player extends Component {
 	}
 	checkFav = (url) => {
 		const favorites = this.getFav();
-		console.log('contains favorite', url, favorites.has(url));
+		// console.log('contains favorite', url, favorites.has(url));
 		return favorites.has(url);
 	}
 	onPlayerPlay = () => {
@@ -176,7 +176,7 @@ export default class Player extends Component {
 
 		return (
 			<div>
-				<section className={classNames.playerWrapper} style={style.wrapper}>
+				<section id="playerWrapper" className={classNames.playerWrapper} style={style.wrapper}>
 					<ReactPlayer ref="player"
 						className={classNames.player}
 						width="100%" height="100%"

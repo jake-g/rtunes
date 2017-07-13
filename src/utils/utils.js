@@ -112,11 +112,11 @@ export function toggleDarkMode(state) {
 		img,*:not(object):not(body)>embed,object,*[style*="background:url"]:empty,*[style*="background-image:url"]:empty,*[style*="background: url"]:empty,*[style*="background-image: url"]:empty {
 		  -webkit-filter: invert(100%) hue-rotate(180deg) !important;
 		}
-		.Player-player, .html5-video-player {
+		#playerWrapper {
 			-webkit-filter: invert(100%) hue-rotate(180deg) !important;
 		}`
 		if (whatBrowser() === 'safari') { // hack to make background work in safari
-			style.replace(/background: rgb(41, 40, 38) !important;/, '');  // remove
+			style = style.replace('background: rgb(41, 40, 38) !important;', '');  // remove
 		}
 		insertCss(style);
 	} else {
